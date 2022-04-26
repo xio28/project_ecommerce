@@ -33,4 +33,16 @@ git push origin --delete nombre_rama
 git fetch
 ## No actualizará tu repo local, como hace "pull", pero sí te permitirá saber qué cambios se han hecho antes de que decidas hacer el "pull".
 
+# En vez de escribir la url completa de un repo, podemos asignarle un nombre sencillo a la hora de hacer "pull" o "push".
+git remote add nombre_para_el_repo url_repo
 
+# Para ver la lista de repos remotos usamos:
+git remote 
+o 
+git remote -v (muestra la url además)
+
+# Para borrar un remote
+git remote rm nombre_asignado_remote
+
+# También podemos renombrarlo usando:
+git remote rename old_name new_name
