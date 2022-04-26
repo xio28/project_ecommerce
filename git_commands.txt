@@ -2,13 +2,35 @@
 git branch
 
 # Añadiendo un nombre después de "branch" estás creando una rama.
-git branch experimental
+git branch nombre_rama
 
 # Este comando te permite ver información más detallada de los cambios hechos, si se ha hecho algún commit, además de ver en qué rama estás trabajando.
 git show-branch
 
 # Este comando te permite cambiar de rama a la vez que la creas.
-git checkout -b anotherbranch
+git checkout -b nombre_rama
 
-# Para hacer un "merge" y fusionar las ramas, es necesario estar ubicado en la rama "master" o "main" (como se llama ahora), y añadir el comando más el nombre de la rama.
-git merge experimental
+# Para hacer un "merge" y fusionar las ramas, es necesario estar ubicado en la rama "master" o "main" (como se llama ahora), y añadir el comando más el nombre de la rama. Lo ideal, además, es añadir un commit al "merge".
+git merge nombre_rama -m "Se ha fusionado la rama con la main."
+
+# Si trabajas en la rama experimental y quieres unir los cambios hechos en la "main" a tu rama, puedes hacerlo así:
+git merge main -m "Fusionados cambios en la main con la rama."
+
+# Si quieres subir tu rama al repositorio debes escribir:
+git push -u origin nombre_rama
+
+# Para borrar una rama se debe tener en cuenta si se ha hecho o no el push:
+
+## Si no has hecho el push y sigue en local:
+git branch -d nombre_rama 
+o 
+git branch -D nombre_rama (-D sirve para forzar el borrado)
+
+## Si ya has hecho el push y está en remoto:
+git push origin --delete nombre_rama
+
+# Si queremos comprobar los últimos cambios realizados en el repositorio remoto en vez de hacer un "pull" y descargarlos, podemos usar el siguiente comando:
+git fetch
+## No actualizará tu repo local, como hace "pull", pero sí te permitirá saber qué cambios se han hecho antes de que decidas hacer el "pull".
+
+
