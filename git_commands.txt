@@ -20,7 +20,6 @@ git merge main -m "Fusionados cambios en la main con la rama."
 git push -u origin nombre_rama
 
 # Para borrar una rama se debe tener en cuenta si se ha hecho o no el push:
-
 ## Si no has hecho el push y sigue en local:
 git branch -d nombre_rama 
 o 
