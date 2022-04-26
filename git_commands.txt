@@ -1,0 +1,14 @@
+# Muestra en qué rama estás trabajando; la rama master sería "main"; además, la rama seleccionada debe venir precedida de un asterisco.
+git branch
+
+# Añadiendo un nombre después de "branch" estás creando una rama.
+git branch experimental
+
+# Este comando te permite ver información más detallada de los cambios hechos, si se ha hecho algún commit, además de ver en qué rama estás trabajando.
+git show-branch
+
+# Este comando te permite cambiar de rama a la vez que la creas.
+git checkout -b anotherbranch
+
+# Para hacer un "merge" y fusionar las ramas, es necesario estar ubicado en la rama "master" o "main" (como se llama ahora), y añadir el comando más el nombre de la rama.
+git merge experimental
