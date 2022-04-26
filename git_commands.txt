@@ -38,6 +38,17 @@ git fetch
 ## No actualizará tu repo local, como hace "pull", pero sí te permitirá saber qué cambios se han hecho antes de que decidas hacer el "pull".
 
 
+################################# Resumen #################################
+
+git checkout nombre_rama
+
+# Una vez realices cambios:
+git add .
+git commit -m "mensaje"
+git checkout main
+git merge nombre_rama (-m "mensaje") # se puede omitir el paréntesis
+git push
+
 
 
 
