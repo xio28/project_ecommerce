@@ -13,11 +13,11 @@ class Login(GuiModules):
     __MIN_WIDTH = 380
 
     # COLORS SCHEME___________________________________________
-    BG = "dodger blue"
-    FONT1 = "lightblue1"
-    FONT2 = "gray30"
-    BTN_BG = "lightskyblue1"
-    BTN_FG = "gray10"
+    BG = "#9ccc04"
+    FONT1 = "#3c413c"
+    FONT2 = "#5d634f"
+    BTN_BG = "#87857e"
+    BTN_FG = "#ffffff"
 
     def __init__(self):
         self._login()
@@ -47,7 +47,7 @@ class Login(GuiModules):
         self.separator = Label(self.root, bg=self.BG).pack(pady=15)
 
         self.login = Button(self.root, text="Login", bg=self.BTN_BG, fg=self.BTN_FG, font=('Arial', 13), command=lambda:self.log_in(username, password)).pack(fill=X, padx=25, pady=5)
-        self.singup = Button(self.root, text="Singup", bg=self.BTN_BG, fg=self.BTN_FG, font=('Arial', 13), command=lambda:self.sing_up(username, password)).pack(fill=X, padx=25)
+        self.singup = Button(self.root, text="Sing up", bg=self.BTN_BG, fg=self.BTN_FG, font=('Arial', 13), command=lambda:self.sing_up(username, password)).pack(fill=X, padx=25)
 
         # MAINLOOP____________________________________________
         self.root.mainloop()
