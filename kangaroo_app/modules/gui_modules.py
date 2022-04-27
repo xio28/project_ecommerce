@@ -4,10 +4,10 @@ from tkinter import messagebox
 class GuiModules(LoginModules):
     
     # ERROR MESSAGES_________________________________
-    def error_user_exists(self, username):
+    def _error_user_exists(self, username):
         pass
 
-    def error_user_not_exists(self, username):
+    def _error_user_not_exists(self, username):
         pass
 
     # Login__________________________________________
