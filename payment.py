@@ -1,11 +1,5 @@
-from os import system, name
+from modules import clear
 import json
-
-if name == "nt":
-    system('cls')
-else:
-    system('clear')
-
 
 class Payment:
 
