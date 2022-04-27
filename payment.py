@@ -1,20 +1,19 @@
-from modules import clear
+from modules.clear import clear
+from modules.modules import *
+from order import *
+from client import *
 import json
 
 class Payment:
 
     def __init__(self):
+        self.__operation = {}
+
+
+    def __get_order_total_cost(self):
         self.__operation = {
-            self.__gen_operation_code(): [self.__username, self.__total_cost]
+            self.last_key(): [self._username, self._calc_total()]
             }
-    
-
-    def last_key(self):
-        return 1 if len(self.__operation) == 0 else (list(self.__operation.keys())[-1]) + 1
-
-
-    def __gen_operation_code(self):
-        pass
 
 
 class Card:
@@ -33,11 +32,6 @@ class Bizum:
     
     def __init__(self):
         self.__send_bizum_gateway()
-
-
-    def file_as_list(self):
-        with open(self.__BIZUM_CRED_FILE, "r") as f:
-            return [json.loads(credentials) for credentials in f.readlines()]
 
 
     def _check_credentials(self, tel_num, pin):

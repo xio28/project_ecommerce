@@ -1,1 +1,1 @@
-from modules import clear
+from modules.clear import *

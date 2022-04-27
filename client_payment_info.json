@@ -1,0 +1,13 @@
+{   
+    "username": "",
+    "payments": {
+        "paypal": {
+            "email": "email",
+            "password": "password"
+        },
+        "bizum": {
+            "phone": "phone",
+            "pin": "pin"
+        }
+    }
+}
