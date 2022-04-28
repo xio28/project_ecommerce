@@ -1,18 +1,27 @@
-from modules.clear import *
-from order_details import *
 from modules.modules import *
+from modules.clear import *
+
+clear()
 
 class Order(Modules):
     
-    def __init__(self):
-        self._username
-        self._order = []
+    def __init__(self, order = []):
+        self._order = order
 
 
-    def cart(self, item, amount):
-        pass
+    def calc_total(self, taxes = 0.21): # Añadir un select con la opción de elegir el porcentaje de impuestos
+        return round(self.calc_subtotal() + (self.calc_subtotal() * taxes), 2)
+
+    
+    def calc_subtotal(self):
+        subtotal = 0
+
+        for elem in self._order:
+            subtotal += (elem[1] * elem[2])
         
+        return round(subtotal, 2)
 
 
-    def _calc_total(self, subtotal, taxes = 0.21):
-        return subtotal * (subtotal * taxes)
+
+
+# order = Order([["item1", 4, 15.59], ["item2", 8, 25.99], ["item3", 2, 5.26]])
