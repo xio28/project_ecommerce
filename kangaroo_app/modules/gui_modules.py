@@ -2,7 +2,7 @@ from modules.login_modules import *
 from tkinter import messagebox
 
 class GuiModules(LoginModules):
-    
+
     # ERROR MESSAGES_________________________________
     def _error_user_exists(self, username):
         pass
