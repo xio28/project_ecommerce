@@ -1,7 +1,7 @@
 from json import *
-from clear import *
+# from clear import *
 
-clear()
+# clear()
 
 class Modules:
 
