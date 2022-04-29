@@ -1,7 +1,7 @@
-from modules import clear
+from modules.modules import *
 from modules.modules import *
 
-class Products(Modules):
+class Products:
 
     def __init__(self):
         self._products_info = {}

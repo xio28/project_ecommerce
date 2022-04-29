@@ -3,10 +3,11 @@ sys.path.append(r"C:\xampp\htdocs\project_ecommerce")
 
 from modules.modules import *
 from modules.clear import *
+from database.connect_db import *
 
 clear()
 
-class Order(Modules):
+class Order:
     
     def __init__(self, order = []):
         self._order = order
@@ -23,8 +24,6 @@ class Order(Modules):
             subtotal += (elem[1] * elem[2])
         
         return round(subtotal, 2)
-
-
 
 
 order = Order([["item1", 4, 15.59], ["item2", 8, 25.99], ["item3", 2, 5.26]])

@@ -1,4 +1,4 @@
-from modules.clear import clear
+from modules.clear import *
 from modules.modules import *
 from order import *
 from client import *
