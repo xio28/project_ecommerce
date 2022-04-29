@@ -19,7 +19,7 @@ class Client:
     # JSON_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.json"
     JSON_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.json"
 
-    def __init__(self, username, email, password, name, nid, address, contact, recommended, pets = {}, payments = {}):
+    def __init__(self, username, email, password, name, nid, address, contact, payments = {}):
         self._username = username
         self._email = email
         self.__password = password
@@ -27,15 +27,11 @@ class Client:
         self._nid = nid
         self._address = address
         self._contact = contact
-        self._recommended = recommended
-        self._pets = pets
         self._payments = payments
-        self.user_info()
-        self.load_json()
+        # self.user_info()
 
 
-
-    def user_info(self):
+    def add_to_db(self):
         with open(self.JSON_FILE, "r+") as f:
             user_info = {
                 # "_id": last_key(self._user_info),
@@ -53,17 +49,13 @@ class Client:
 
             write_json(user_info, self.JSON_FILE)
 
-    
-    def load_json(self):
-        with open(self.JSON_FILE, "r+") as f:
-            print(f.read())
 
 
 
-client1 = Client("ilos28", "holaMundo", "xiomara@gmail.com", "Siomara Alonso", "44444444T", {"street": "C/Torres 1, 2º D", "postal_code": "35017", "city": "Las Palmas de G.C."}, ["678678678", "696696696"], True, [{"species": "perro", "pet_name": "Robin", "birthdate": "06/03/2014"}, {"species": "gato", "pet_name": "Deny", "birthdate": "20/09/2009"}])
-client2 = Client("carcoal", "holaMundo", "chris@gmail.com", "Chris Medina", "33333333T", {"street": "C/Vega 1, 3º D", "postal_code": "35022", "city": "Telde"}, ["645124753"], False, [{"species": "gato", "pet_name": "Vilma", "birthdate": "28/10/2020"}])
+# client1 = Client("ilos28", "holaMundo", "xiomara@gmail.com", "Siomara Alonso", "44444444T", {"street": "C/Torres 1, 2º D", "postal_code": "35017", "city": "Las Palmas de G.C."}, ["678678678", "696696696"])
+# client2 = Client("carcoal", "holaMundo", "chris@gmail.com", "Chris Medina", "33333333T", {"street": "C/Vega 1, 3º D", "postal_code": "35022", "city": "Telde"}, ["645124753"])
 
-
+user_exists("hola", "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.json")
 # client1.user_info()
 # client2.user_info()
 # clients_db = [client1, client2]
