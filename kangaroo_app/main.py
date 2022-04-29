@@ -8,7 +8,7 @@ class KangarooInterface(GuiModules):
     _MIN_HEIGHT = 320
     _MIN_WIDTH = 380
 
-    _LOGO_PATH = './img/kangaroo_2.png'
+    _LOGO_PATH = './img/kangaroo_300.png'
 
     # COLORS SCHEME___________________________________________
     BG = "#f3f3f3"
