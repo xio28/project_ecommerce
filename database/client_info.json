@@ -1,26 +1,54 @@
-{
-  "user": {
-    "username": "carcoal",
-    "email": "holaMundo",
-    "password": "chris@gmail.com",
-    "name": "Chris Medina",
-    "NID": "33333333T",
-    "phone": [
-      "645124753"
-    ],
-    "recommended": false,
-    "address": {
-      "street": "C/Vega 1, 3\u00ba D",
-      "postal_code": "35022",
-      "city": "Telde"
+[{
+  "username": "ilos28",
+  "email": "holaMundo",
+  "password": "xiomara@gmail.com",
+  "name": "Siomara Alonso",
+  "NID": "44444444T",
+  "phone": [
+    "678678678",
+    "696696696"
+  ],
+  "recommended": true,
+  "address": {
+    "street": "C/Torres 1, 2\u00ba D",
+    "postal_code": "35017",
+    "city": "Las Palmas de G.C."
+  },
+  "pets": [
+    {
+      "species": "perro",
+      "pet_name": "Robin",
+      "birthdate": "06/03/2014"
     },
-    "pets": [
-      {
-        "species": "gato",
-        "pet_name": "Vilma",
-        "birthdate": "28/10/2020"
-      }
-    ],
-    "payments": {}
-  }
-}
+    {
+      "species": "gato",
+      "pet_name": "Deny",
+      "birthdate": "20/09/2009"
+    }
+  ],
+  "payments": {}
+},
+{
+  "username": "carcoal",
+  "email": "holaMundo",
+  "password": "chris@gmail.com",
+  "name": "Chris Medina",
+  "NID": "33333333T",
+  "phone": [
+    "645124753"
+  ],
+  "recommended": false,
+  "address": {
+    "street": "C/Vega 1, 3\u00ba D",
+    "postal_code": "35022",
+    "city": "Telde"
+  },
+  "pets": [
+    {
+      "species": "gato",
+      "pet_name": "Vilma",
+      "birthdate": "28/10/2020"
+    }
+  ],
+  "payments": {}
+}]
