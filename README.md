@@ -42,9 +42,7 @@
     * ID (autoincrementado)
     * Pedido (diccionario con los datos del propio pedido)
 
-* Detalles del pedido???
-
-* Generar un nuevo método de pago:
+* Generar un nuevo **método de pago**:
     * Codigo de transaccion
     * Datos del cliente
     * Importe_total
