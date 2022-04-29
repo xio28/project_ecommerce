@@ -64,38 +64,39 @@ class SingupGui(KangarooInterface):
         # VAR DECLARATION____________________________________________________
         self.username = tk.StringVar()
         self.password = tk.StringVar()
-
-        # PANED FRAMES_______________________________________________________
-        self.root.grid_rowconfigure(0, weight=1)
-        self.root.grid_columnconfigure(0, weight=1)
-
-        self.logo_fr = tk.Frame(self.root)
-        self.logo_fr.grid(row=0, column=0, sticky='news')
-        self.form_fr = tk.Frame(self.root, bg=self.BG)
-        self.form_fr.grid(row=0, column=1, sticky='news')
-
-        # LOGO_______________________________________________________________
-        self.logo = tk.PhotoImage(file=self._LOGO_PATH)
-        self.logo_l = tk.Label(self.logo_fr, image=self.logo, bg=self.BG).pack()
-
-        # SINGUP GUI_________________________________________________________
-        self.username_label = tk.Label(self.form_fr, text="Username", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).pack(anchor=tk.W, padx=25)
-        self.username_entry = tk.Entry(self.form_fr, textvariable=self.username, fg=self.FONT2, font=('Arial', 12))
-        self.username_entry.pack(fill=tk.X, padx=25, pady=2)
+        
+        # SingUp GUI_________________________________________________________
+        self.title = tk.Label(self.root, text="Kangaroo | SingUp Form", bg=self.BTN_BG, fg=self.BTN_FG, font=('Arial Bold', 12)).grid(row=0, column=0, columnspan=4, sticky='we')
+        self.separator = tk.Label(self.root, bg=self.BG).grid(row=1, column=0)
+        self.username_label = tk.Label(self.root, text="Username", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).grid(row=2, column=0, columnspan=2, sticky='W', padx=20)
+        
+        self.username_entry = tk.Entry(self.root, fg=self.FONT2, font=('Arial', 12), width=30)
+        self.username_entry.grid(row=3, column=0, columnspan=2, sticky='news', padx=20, pady=5)
         self.username_entry.focus_set()
 
-        self.password_label = tk.Label(self.form_fr, text="Password", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).pack(anchor=tk.W, padx=25)
-        self.password_entry = tk.Entry(self.form_fr, textvariable=self.password, fg=self.FONT2, font=('Arial', 12)).pack(fill=tk.X, padx=25, pady=2)
+        self.dni_label = tk.Label(self.root, text="DNI", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).grid(row=2, column=2, columnspan=2, sticky='W', padx=20)
+        self.dni_entry = tk.Entry(self.root, fg=self.FONT2, font=('Arial', 12), width=30).grid(row=3, column=2, columnspan=2, sticky='news', padx=20, pady=5)
 
-        self.email_label = tk.Label(self.form_fr, text="Email", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).pack(anchor=tk.W, padx=25)
-        self.email_entry = tk.Entry(self.form_fr, fg=self.FONT2, font=('Arial', 12)).pack(fill=tk.X, padx=25, pady=2)
+        self.name_label = tk.Label(self.root, text="First Name", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).grid(row=4, column=0, columnspan=2, sticky='W', padx=20)
+        self.name_entry = tk.Entry(self.root, fg=self.FONT2, font=('Arial', 12)).grid(row=5, column=0, columnspan=2, sticky='news', padx=20, pady=5)
 
-        self.contact_label = tk.Label(self.form_fr, text="Phone Number", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).pack(anchor=tk.W, padx=25)
-        self.contact_entry = tk.Entry(self.form_fr, fg=self.FONT2, font=('Arial', 12)).pack(fill=tk.X, padx=25, pady=2)
+        self.l_name_label = tk.Label(self.root, text="Last Name", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).grid(row=4, column=2, columnspan=2, sticky='W', padx=20)
+        self.l_name_entry = tk.Entry(self.root, fg=self.FONT2, font=('Arial', 12)).grid(row=5, column=2, columnspan=2, sticky='news', padx=20, pady=5)
 
-        self.id_label = tk.Label(self.form_fr, text="DNI", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).pack(anchor=tk.W, padx=25)
-        self.id_entry = tk.Entry(self.form_fr, fg=self.FONT2, font=('Arial', 12)).pack(fill=tk.X, padx=25, pady=2)
+        self.email_label = tk.Label(self.root, text="Email", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).grid(row=6, column=0, columnspan=2, sticky='W', padx=20)
+        self.email_entry = tk.Entry(self.root, fg=self.FONT2, font=('Arial', 12)).grid(row=7, column=0, columnspan=2, sticky='news', padx=20, pady=5)
 
+        self.contact_label = tk.Label(self.root, text="Contact Number", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).grid(row=6, column=2, columnspan=2, sticky='W', padx=20)
+        self.contact_entry = tk.Entry(self.root, fg=self.FONT2, font=('Arial', 12)).grid(row=7, column=2, columnspan=2, sticky='news', padx=20, pady=5)
+
+        self.addres_label = tk.Label(self.root, text="Addres", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).grid(row=8, column=0, columnspan=2, sticky='W', padx=20)
+        self.addres_entry = tk.Entry(self.root, fg=self.FONT2, font=('Arial', 12)).grid(row=9, column=0, columnspan=2, sticky='news', padx=20, pady=5)
+
+        self.password_label = tk.Label(self.root, text="Password", bg=self.BG, fg=self.FONT1, font=('Arial', 14)).grid(row=8, column=2, columnspan=2, sticky='W', padx=20)
+        self.password_entry = tk.Entry(self.root, fg=self.FONT2, font=('Arial', 12)).grid(row=9, column=2, columnspan=2, sticky='news', padx=20, pady=5)
+
+        self.clear_btn = tk.Button(self.root, text="Clear", width=12, bg=self.BTN_BG, fg=self.BTN_FG, activebackground=self.BTN_HOVER, activeforeground=self.BTN_FG).grid(row=11, column=2, sticky="E", padx=10, pady=15)
+        self.submit_btn = tk.Button(self.root, text="Submit", width=13, bg=self.BTN_BG, fg=self.BTN_FG, activebackground=self.BTN_HOVER, activeforeground=self.BTN_FG).grid(row=11, column=3, sticky="W", padx=10, pady=15)
 
 class Launcher(SingInGui):
     
