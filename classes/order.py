@@ -1,3 +1,6 @@
+import sys
+sys.path.append(r"C:\xampp\htdocs\project_ecommerce")
+
 from modules.modules import *
 from modules.clear import *
 
@@ -9,7 +12,7 @@ class Order(Modules):
         self._order = order
 
 
-    def calc_total(self, taxes = 0.21): # Añadir un select con la opción de elegir el porcentaje de impuestos
+    def calc_total(self, taxes = 0.07): # Añadir un select con la opción de elegir el porcentaje de impuestos
         return round(self.calc_subtotal() + (self.calc_subtotal() * taxes), 2)
 
     
@@ -24,4 +27,6 @@ class Order(Modules):
 
 
 
-# order = Order([["item1", 4, 15.59], ["item2", 8, 25.99], ["item3", 2, 5.26]])
+order = Order([["item1", 4, 15.59], ["item2", 8, 25.99], ["item3", 2, 5.26]])
+
+print(order.calc_total())

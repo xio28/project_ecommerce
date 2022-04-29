@@ -1,10 +1,16 @@
 import sys
-sys.path.append(r"C:\xampp\htdocs\project_ecommerce")
+from os import name
+
+if name == "nt":
+    sys.path.append(r"C:\xampp\htdocs\project_ecommerce")
+else:
+    sys.path.append("/home/1cfgs/...")
+
 
 from modules.clear import *
 import json
 
-# clear()
+clear()
 
 
 class Client:
@@ -23,6 +29,9 @@ class Client:
         self._pets = pets
         self._payments = payments
         self._user_info = {}
+
+    def __str__(self) -> str:
+        pass
 
 
     def user_info(self):
