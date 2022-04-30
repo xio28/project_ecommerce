@@ -20,7 +20,7 @@ def write_json(new_data, filename, key, condition):
             else:
                 f.write(dumps(new_data) + '\n')
 
-    except IOError:
+    except (FileNotFoundError, IOE):
         with open(filename, 'w') as f:
             f.write(dumps(new_data) + '\n')
 

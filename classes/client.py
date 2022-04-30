@@ -8,65 +8,43 @@ else:
 
 from modules.clear import *
 from modules.modules import *
-import json
-# from pymongo.mongo_client import MongoClient
-# from database.connect_db import *
+from database.connect_db import *
 
 clear()
 
-# class Client:
+class Client:
 
-#     JSON_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
-#     # JSON_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
+    JSON_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+    # JSON_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
 
-#     def __init__(self, username, email, password, name, nid, address, contact, payments = {}):
-#         self._username = username
-#         self._email = email
-#         self.__password = password
-#         self._name = name
-#         self._nid = nid
-#         self._address = address
-#         self._contact = contact
-#         self._payments = payments
-#         self.store_user_info()
-
+    def __init__(self, username, email, password, name, nid, address, contact):
+        self._username = username
+        self._email = email
+        self.__password = password
+        self._name = name
+        self._nid = nid
+        self._address = address
+        self._contact = contact
+        self.store_user_info()
 
 
-#     def store_user_info(self):
-#         with open(self.JSON_FILE, "r+") as f:
-#             user_info = {
-#                 # "_id": last_key(self._user_info),
-#                 "username": self._username,
-#                 "email": self._email,
-#                 "password": self.__password,
-#                 "name": self._name,
-#                 "NID": self._nid,
-#                 "phone": self._contact,
-#                 "address": self._address,
-#                 "payments": self._payments
-#             }
+    def store_user_info(self):
+        user_info = {
+            "username": self._username,
+            "email": self._email,
+            "password": self.__password,
+            "name": self._name,
+            "NID": self._nid,
+            "phone": self._contact,
+            "address": self._address
+        }
 
-#             write_json(user_info, self.JSON_FILE, "username", self._username)
+        write_json(user_info, self.JSON_FILE, "username", self._username)
+        db.clients.insert_one(user_info)
 
 
-
-# client1 = Client("ilos28", "holaMundo", "xiomara@gmail.com", "Siomara Alonso", "44444444T", {"street": "C/Torres 1, 2º D", "postal_code": "35017", "city": "Las Palmas de G.C."}, ["678678678", "696696696"])
-# client2 = Client("carcoal", "holaMundo", "chris@gmail.com", "Chris Medina", "33333333T", {"street": "C/Vega 1, 3º D", "postal_code": "35022", "city": "Telde"}, ["645124753"])
-
-# client1.user_info()
-# client2.user_info()
-# clients_db = [client1, client2]
-
-# result = db.clients.insert_many(clients_db.__dict__)
-
-# print('Éxito al insertar')
-# print(result)
-
-# client.user_info()
-# client1.user_info()
-# client2.user_info()
-# client1.add_to_json()
-# client2.add_to_json()
+client1 = Client("ilos28", "holaMundo", "xiomara@gmail.com", "Siomara Alonso", "44444444T", {"street": "C/Torres 1, 2º D", "postal_code": "35017", "city": "Las Palmas de G.C."}, ["678678678", "696696696"])
+client2 = Client("carcoal", "holaMundo", "chris@gmail.com", "Chris Medina", "33333333T", {"street": "C/Vega 1, 3º D", "postal_code": "35022", "city": "Telde"}, ["645124753"])
 
 
     
