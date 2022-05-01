@@ -8,8 +8,16 @@ def file_as_list(file):
 
 
 def last_key(dict):
-    return 1 if len(dict) == 0 else (list(dict.keys())[-1]) + 1
+    if bool(dict):
+        return dict['id'] == 1
+    else:
+        return (list(dict['id'])[-1]) + 1
 
+# return 1 if len(dict) == 0 else (list(dict.keys())[-1]) + 1
+
+
+d = {"id": 1, "username": "caracol"}
+print(last_key(d))
 
 def write_json(new_data, filename, key, condition):
     try:
@@ -20,7 +28,7 @@ def write_json(new_data, filename, key, condition):
             else:
                 f.write(dumps(new_data) + '\n')
 
-    except (FileNotFoundError, IOE):
+    except (FileNotFoundError, IOError):
         with open(filename, 'w') as f:
             f.write(dumps(new_data) + '\n')
 
