@@ -2,6 +2,8 @@ from json import *
 from os import stat
 # from clear import *
 
+JSON_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+
 def file_as_list(file):
     with open(file, "r") as f:
         return [loads(x) for x in f.readlines()]
@@ -13,7 +15,12 @@ def last_key(dict):
     else:
         return (list(dict['id'])[-1]) + 1
 
-# return 1 if len(dict) == 0 else (list(dict.keys())[-1]) + 1
+
+def test_funct():
+    file_to_open = file_as_list(JSON_FILE)
+
+    for x in file_to_open:
+        pass
 
 
 d = {"id": 1, "username": "caracol"}
