@@ -5,8 +5,8 @@ class BasicModules():
 
     # CREATE DB IF NOT EXISTS______________________
     def _create_db_user(self):
-        if not os.path.exists(self.__USER_PATH):
-            with open(self.__USER_PATH, 'x') as f:
+        if not os.path.exists(self._USER_PATH):
+            with open(self._USER_PATH, 'x') as f:
                 pass
 
     

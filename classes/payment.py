@@ -6,13 +6,18 @@ import json
 
 class Payment:
 
+    PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\orders_file.txt"
+
     def __init__(self):
-        self.__operation = {}
+        self._operation = {}
 
 
-    def __get_order_total_cost(self):
-        self.__operation = {
-            self.last_key(): [self._username, self._calc_total()]
+    def _get_order_total_cost(self, username):
+        operation_file = file_as_list()
+
+        self._operation = {
+            'id': last_key(operation_file),
+            'order': [username, self.calc_total()]
             }
 
 
@@ -23,6 +28,9 @@ class Card:
         self.__card_number = card_number
         self.__expiration_date = expiration_date
         self.__cvv = cvv
+
+    def save_payment_info(self):
+        pass
 
 
 
