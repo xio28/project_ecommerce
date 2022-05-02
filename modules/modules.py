@@ -2,7 +2,7 @@ from json import *
 from os import stat
 # from clear import *
 
-JSON_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+CLIENT_INFO = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
 
 def file_as_list(file):
     with open(file, "r") as f:
@@ -10,17 +10,31 @@ def file_as_list(file):
 
 
 def last_key(dict):
-    if bool(dict):
-        return dict['id'] == 1
+    if not bool(dict):
+        return dict.get('id', 1)
     else:
-        return (list(dict['id'])[-1]) + 1
+        return dict.get('id') + 1
+
+
+d = {'id': 1}
+print(last_key(d))
 
 
 def test_funct():
-    file_to_open = file_as_list(JSON_FILE)
+    clients_file = file_as_list(CLIENT_INFO)
 
-    for x in file_to_open:
+    for x in clients_file:
         pass
+
+def check_if_user_exists(username):
+    clients_file = file_as_list(CLIENT_INFO)
+
+    for c_info in clients_file:
+        if c_info['username'] == username:
+            return True
+    
+    return False
+        
 
 
 d = {"id": 1, "username": "caracol"}
