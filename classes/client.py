@@ -8,14 +8,15 @@ else:
 
 from modules.clear import *
 from modules.modules import *
-from database.connect_db import *
+# from database.connect_db import *
 
 clear()
 
 class Client:
 
-    JSON_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
-    # JSON_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
+    # JSON_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+    CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
+    PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
 
     def __init__(self, username, email, password, name, nid, address, contact):
         self._username = username
@@ -39,8 +40,24 @@ class Client:
             "address": self._address
         }
 
-        write_json(user_info, self.JSON_FILE, "username", self._username)
-        db.clients.insert_one(user_info)
+        payment_info = {
+            "username": self._username,
+            "payment": {
+                "card": [],
+                "paypal": [],
+                "bizum": []
+            }
+        }
+
+        if check_if_user_exists("username"):
+            print(f"El usuario {self._username} ya existe.")
+            # return False
+        else:
+            write_json(user_info, self.CLIENTS_FILE)
+            write_json(payment_info, self.PAYMENTS_FILE)
+
+
+        # db.clients.insert_one(user_info)
 
 
 client1 = Client("ilos28", "holaMundo", "xiomara@gmail.com", "Siomara Alonso", "44444444T", {"street": "C/Torres 1, 2º D", "postal_code": "35017", "city": "Las Palmas de G.C."}, ["678678678", "696696696"])

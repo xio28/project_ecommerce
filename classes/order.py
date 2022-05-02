@@ -8,9 +8,17 @@ from database.connect_db import *
 clear()
 
 class Order:
+
+    ORDERS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/orders_info.txt"
     
     def __init__(self, order = []):
         self._order = order
+        self._orders_info = []
+
+
+    def gen_order_info(self):
+        pass
+        
 
 
     def calc_total(self, taxes = 0.07): # Añadir un select con la opción de elegir el porcentaje de impuestos

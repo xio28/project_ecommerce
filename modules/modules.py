@@ -16,8 +16,8 @@ def last_key(dict):
         return dict.get('id') + 1
 
 
-d = {'id': 1}
-print(last_key(d))
+# d = {'id': 1}
+# print(last_key(d))
 
 
 def test_funct():
@@ -27,27 +27,27 @@ def test_funct():
         pass
 
 def check_if_user_exists(username):
-    clients_file = file_as_list(CLIENT_INFO)
+    try:
+        clients_file = file_as_list(CLIENT_INFO)
 
-    for c_info in clients_file:
-        if c_info['username'] == username:
-            return True
-    
-    return False
+        for c_info in clients_file:
+            if c_info['username'] == username:
+                return True
         
+        return False
+
+    except (FileNotFoundError, IOError):
+        return False
+        
+# d = {"id": 1, "username": "caracol"}
+# print(last_key(d))
 
 
-d = {"id": 1, "username": "caracol"}
-print(last_key(d))
 
-def write_json(new_data, filename, key, condition):
+def write_json(new_data, filename):
     try:
         with open(filename, 'a') as f:
-            if check_key_condition(key, condition, filename):
-                print(f"El {key} {condition} ya existe.")
-                return False
-            else:
-                f.write(dumps(new_data) + '\n')
+            f.write(dumps(new_data) + '\n')
 
     except (FileNotFoundError, IOError):
         with open(filename, 'w') as f:
@@ -62,12 +62,12 @@ def check_if_file_empty(filename):
     
 
 # Comprueba si una condición (nombre, número, etc.) está dentro del diccionario
-def check_key_condition(key, condition, filename):
-    file_data = file_as_list(filename)
+# def check_key_condition(key, condition, filename):
+#     file_data = file_as_list(filename)
 
-    with open(filename, 'r') as f:
-        for data in file_data:
-            if data[key] == condition:
-                return True
+#     with open(filename, 'r') as f:
+#         for data in file_data:
+#             if data[key] == condition:
+#                 return True
         
-        return False
+#         return False
