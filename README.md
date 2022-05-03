@@ -48,7 +48,7 @@
     * Importe_total
 
     * Tipo de pago:
-        * Bizum
+        * Bizum:
         * Paypal
         * Tarjeta:
             * Número tarjeta

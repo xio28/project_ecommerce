@@ -8,11 +8,6 @@ else:
 
 from modules.modules import *
 
-class KangarooPlatform:
-
-    def __init__(self, nif, ecommerce_name, address):
-        self.__nif = nif
-        self._ecommerce_name = ecommerce_name
-        self._address = address
-
-    
+class Invoice:
+    def __init__(self) -> None:
+        pass

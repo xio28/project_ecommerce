@@ -1,8 +1,8 @@
-from bson import ObjectId
+# from bson import ObjectId
 import sys
 sys.path.append(r"C:\xampp\htdocs\project_ecommerce")
 
-from pymongo.mongo_client import MongoClient
+# from pymongo.mongo_client import MongoClient
 from os import name, system
 
 def clear():

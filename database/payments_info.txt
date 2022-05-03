@@ -1,0 +1,2 @@
+{"ilos28": {"card": [], "paypal": [], "bizum": []}}
+{"carcoal": {"card": [], "paypal": [], "bizum": []}}
