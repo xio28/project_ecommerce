@@ -14,10 +14,11 @@ clear()
 
 class Client:
 
-    CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
-    PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
-    # CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
-    # PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
+    # CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+    # PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
+    CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
+    PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
+    
 
     def __init__(self, username, email, password, name, nid, address, contact):
         self._username = username
