@@ -1,8 +1,9 @@
 from json import *
 from os import stat
+from pathlib import Path
 # from clear import *
 
-CLIENT_INFO = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+CLIENTS_INFO = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
 
 def file_as_list(file):
     with open(file, "r") as f:
@@ -21,14 +22,14 @@ def last_key(dict):
 
 
 def test_funct():
-    clients_file = file_as_list(CLIENT_INFO)
+    clients_file = file_as_list(CLIENTS_INFO)
 
     for x in clients_file:
         pass
 
 def check_if_user_exists(username):
     try:
-        clients_file = file_as_list(CLIENT_INFO)
+        clients_file = file_as_list(CLIENTS_INFO)
 
         for c_info in clients_file:
             if c_info['username'] == username:
@@ -39,9 +40,11 @@ def check_if_user_exists(username):
     except (FileNotFoundError, IOError):
         return False
         
-# d = {"id": 1, "username": "caracol"}
-# print(last_key(d))
 
+def if_file_exists(filename):
+    my_file = Path(filename)
+    
+    return my_file.is_file()
 
 
 def write_json(new_data, filename):
@@ -62,12 +65,16 @@ def check_if_file_empty(filename):
     
 
 # Comprueba si una condición (nombre, número, etc.) está dentro del diccionario
-# def check_key_condition(key, condition, filename):
-#     file_data = file_as_list(filename)
+def check_key_condition(key, condition, filename):
+    try:
+        file_data = file_as_list(filename)
 
-#     with open(filename, 'r') as f:
-#         for data in file_data:
-#             if data[key] == condition:
-#                 return True
-        
-#         return False
+        with open(filename, 'r') as f:
+            for data in file_data:
+                if data[key] == condition:
+                    return True
+            
+            return False
+
+    except (FileNotFoundError, IOError):
+        return False

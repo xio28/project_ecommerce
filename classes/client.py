@@ -14,9 +14,10 @@ clear()
 
 class Client:
 
-    # JSON_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
-    CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
-    PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
+    CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+    PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
+    # CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
+    # PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
 
     def __init__(self, username, email, password, name, nid, address, contact):
         self._username = username
@@ -27,6 +28,7 @@ class Client:
         self._address = address
         self._contact = contact
         self.store_user_info()
+        self.store_user_payment_info()
 
 
     def store_user_info(self):
@@ -40,20 +42,29 @@ class Client:
             "address": self._address
         }
 
+        try:
+            if check_if_user_exists(self._username):
+                print("El usuario ya existe.")
+                return False
+            else:
+                write_json(user_info, self.CLIENTS_FILE)
+                return True
+
+        except (FileNotFoundError, IOError):
+            write_json(user_info, self.CLIENTS_FILE)
+            return True
+            
+    
+    def store_user_payment_info(self):
         payment_info = {
-            "username": self._username,
-            "payment": {
+            self._username: {
                 "card": [],
                 "paypal": [],
                 "bizum": []
             }
         }
-
-        if check_if_user_exists("username"):
-            print(f"El usuario {self._username} ya existe.")
-            # return False
-        else:
-            write_json(user_info, self.CLIENTS_FILE)
+        
+        if not self.store_user_info():
             write_json(payment_info, self.PAYMENTS_FILE)
 
 

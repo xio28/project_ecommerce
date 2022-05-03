@@ -1,2 +1,2 @@
-{"username": "ilos28", "payment": {"card": [], "paypal": [], "bizum": []}}
-{"username": "carcoal", "payment": {"card": [], "paypal": [], "bizum": []}}
+{"ilos28": {"card": [], "paypal": [], "bizum": []}}
+{"carcoal": {"card": [], "paypal": [], "bizum": []}}

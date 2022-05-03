@@ -25,11 +25,24 @@ class Payment:
 
         self._operation = {
             'id': last_key(operation_file),
-            'order': [username, self.calc_total()]
+            'order': [username, self.calc_total()], 
+            'payment': ''
             }
 
-    def _check_credentials(self):
-        pass
+
+    def _check_credentials(self, username, payment):
+        if check_if_user_exists(username):
+            lower_payment = payment.lower()
+            payment_file = file_as_list(self.PAYMENTS_FILE)
+            for line in payment_file:
+                if not line[username][lower_payment]:
+                    return line['payment'][lower_payment]
+                else:
+                    if lower_payment == "paypal":
+                        pass
+
+        else:
+            return False
 
 
 
@@ -48,8 +61,6 @@ class Card(Payment):
 
 class Bizum(Payment):
 
-    CREDENTIALS_FILE = "bizum_credentials.txt"
-    
     def __init__(self):
         self.__send_bizum_gateway()
 
@@ -77,9 +88,6 @@ class Bizum(Payment):
         
 
 class PayPal(Payment):
-
-    __PAYPAL_CRED_FILE = "paypal_credentials.txt"
-
     
     def __init__(self):
         self.__send_paypal_gateway()
