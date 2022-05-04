@@ -3,7 +3,7 @@ sys.path.append(r"C:\xampp\htdocs\project_ecommerce")
 
 from modules.modules import *
 from modules.clear import *
-from database.connect_db import *
+# from database.connect_db import *
 
 clear()
 

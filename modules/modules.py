@@ -1,15 +1,22 @@
-from json import *
-from os import stat
+import json
+import pickle
+from os import stat, path
 from pathlib import Path
-# from clear import *
 
-# CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
-CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
+CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+# CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
 
 
-def file_as_list(file):
-    with open(file, "r") as f:
-        return [loads(x) for x in f.readlines()]
+def file_as_list(filename):
+    with open(filename, "r") as f:
+        return [json.loads(x) for x in f.readlines()]
+
+
+
+def load_bin_file(filename):
+    if check_if_file_exists(filename):
+        with open(filename, "rb") as f:
+            return [pickle.load(f)]
 
 
 
@@ -49,39 +56,50 @@ def get_client_info(username, key):
 def write_json(new_data, filename):
     try:
         with open(filename, 'a') as f:
-            f.write(dumps(new_data) + '\n')
+            f.write(json.dumps(new_data) + '\n')
 
     except (FileNotFoundError, IOError):
         with open(filename, 'w') as f:
-            f.write(dumps(new_data) + '\n')
+            f.write(json.dumps(new_data) + '\n')
 
 
 
-def if_file_exists(filename):
-    my_file = Path(filename)
+def write_pickle(new_data, filename):
+    try:
+        with open(filename, 'ab') as f:
+            f.write(pickle.dumps(new_data) + '\n')
+
+    except (FileNotFoundError, IOError):
+        with open(filename, 'wb') as f:
+            f.write(pickle.dumps(new_data) + '\n')
+
+
+
+# def if_file_exists(filename):
+#     my_file = Path(filename)
     
-    return my_file.is_file()
+#     return my_file.is_file()
 
 
 
-def check_if_file_empty(filename):
-    if stat(filename) == 0:
+def check_if_file_exists(filename):
+    if path.getsize(filename) > 0:
         return True
     else:
         return False
     
 
 # Comprueba si una condición (nombre, número, etc.) está dentro del diccionario
-def check_key_condition(key, condition, filename):
-    try:
-        file_data = file_as_list(filename)
+# def check_key_condition(key, condition, filename):
+#     try:
+#         file_data = file_as_list(filename)
 
-        with open(filename, 'r') as f:
-            for data in file_data:
-                if data[key] == condition:
-                    return True
+#         with open(filename, 'r') as f:
+#             for data in file_data:
+#                 if data[key] == condition:
+#                     return True
             
-            return False
+#             return False
 
-    except (FileNotFoundError, IOError):
-        return False
+#     except (FileNotFoundError, IOError):
+#         return False

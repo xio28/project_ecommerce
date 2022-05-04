@@ -1,3 +1,5 @@
+import json
+import pickle
 from sys import path
 from os import name
 
@@ -10,15 +12,13 @@ from modules.clear import *
 from modules.modules import *
 from order import *
 from client import *
-import json
 
 class Payment:
 
-    # PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
-    PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
+    # PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
+    PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
 
     def __init__(self):
-        self._payment = ()
         self._operation = {}
 
 
@@ -32,94 +32,99 @@ class Payment:
             }
 
 
-    def paypal(self, list):
-        email = input("Indique su correo de paypal: ")
-        password = input("Indique su contraseña de paypal: ")
-
-        list.extend([email, password])
-
-
-    def bizum(self, list):
-        phone = input("Indique su número de teléfono: ")
-        pin = input("Indique el PIN de bizum: ")
-
-        list.extend([phone, pin])
-
-
-    def card(self, list):
-        phone = input("Indique su número de teléfono: ")
-        pin = input("Indique el PIN de bizum: ")
-
-        list.extend([phone, pin])
-
-
     def _check_credentials(self, username, payment):
         if check_if_user_exists(username):
-            lower_payment = payment.lower()
             payment_file = file_as_list(self.PAYMENTS_FILE)
 
             for line in payment_file:
-                if not line[username][lower_payment]: # Si la lista está vacía
-                    if lower_payment == "paypal":
-                        pass
+                if not line[username]: # Si la lista está vacía
+                    return False
+
+                else:
+                    self.get_credentials(self, self.PAYMENTS_FILE, username, payment)
 
         else:
             return False
 
 
+    def get_credentials(self, filename, username, payment):
+        file = load_bin_file(filename)
+        dic = file.__dict__
+        l = []
+        if dic["_username"] == username:
+            if payment.lower() == "bizum":
+                l.extend([dic["_phone"], dic["_pin"]])
+
+            elif payment.lower() == "paypal":
+                l.extend([dic["_email"], dic["_password"]])
+
+            else:
+                l.extend([dic["_name"], dic["_card_number"], dic["_expiration_date"], dic["_cvv"]])
+        
+        return l
+
+
+
+    def add_payment_to_file(self, username, obj):
+
+        if check_if_user_exists(username):
+
+            try:
+                with open(self.PAYMENTS_FILE, 'ab') as f:
+                    pickle.dump(obj, f)
+
+            except (FileNotFoundError, IOError):
+                with open(self.PAYMENTS_FILE, 'wb') as f:
+                    pickle.dump(obj, f)
+                        
+        else:
+            return False
+
+
     # Añadir función "devolver métodos de pago"
+    def _return_payment(self):
+        pass
 
 
-class Card(Payment):
+
+class Card:
     
-    def __init__(self, name, card_num, expiration_date, cvv):
-        self.__name = name
-        self.__card_num = card_num
-        self.__expiration_date = expiration_date
-        self.__cvv = cvv
+    def __init__(self, username, name, card_number, expiration_date, cvv):
+        self._username = username
+        self._name = name
+        self._card_number = card_number
+        self._expiration_date = expiration_date
+        self._cvv = cvv
 
-
-
-class Bizum(Payment):
-
-    def __init__(self):
-        self.send_bizum_gateway()
-
-
-    def _check_credentials(self, tel_num, pin):
-        cred_l = self.file_as_list(self.__BIZUM_CRED_FILE)
-
-        for credentials in cred_l:
-            if tel_num == credentials["phone"] and pin == credentials["pin"]:
-                return True
-
-        return False
-        
-
-    def send_bizum_gateway(self):
-        
-        tel_num = input("Introduzca su número de teléfono: ")
-        pin = input("Introduzca su PIN de bizum (4 dígitos): ")
-
-        if self._check_credentials(tel_num, pin):
-            return True
-        
-        return False
-
-        
-
-class PayPal(Payment):
     
-    def __init__(self):
-        self.send_paypal_gateway()
+    def get_card_info(self):
+        pass
 
 
-    def send_paypal_gateway(self):
+class PayPal:
+    
+    def __init__(self, username, email, password):
+        self._username = username
+        self._email = email
+        self._password = password
+    
+
+
+class Bizum:
+
+    def __init__(self, username, phone, pin):
+        self._username = username
+        self._phone = phone
+        self._pin = pin
+
         
-        email = input("Introduzca su email de paypal: ")
-        password = input("Introduzca su contraseña de paypal: ")
 
-        if self._check_credentials(email, password):
-            return True
-        
-        return False
+payment = Payment()
+bizum = Bizum("ilos28", "678678678", "0505")
+paypal = PayPal("ilos28", "xiomara@gmail.com", "holaMundo")
+card = Card("ilos28", "Siomara Alonso", "8124145314781564", "02/26", "333")
+
+print(payment.add_payment_to_file("ilos28", bizum))
+print(payment.add_payment_to_file("ilos28", paypal))
+print(payment.add_payment_to_file("ilos28", card))
+# print(payment.see_file(aux_file, "ilos28"))
