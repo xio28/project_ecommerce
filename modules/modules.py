@@ -7,8 +7,8 @@ from pathlib import Path
 CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
 
 
-def file_as_list(file):
-    with open(file, "r") as f:
+def file_as_list(filename):
+    with open(filename, "r") as f:
         return [loads(x) for x in f.readlines()]
 
 
