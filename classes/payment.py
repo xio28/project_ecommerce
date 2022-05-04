@@ -14,11 +14,9 @@ import json
 
 class Payment:
 
-    # PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
-    PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
+    PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
 
     def __init__(self):
-        self._payment = ()
         self._operation = {}
 
 
@@ -32,34 +30,14 @@ class Payment:
             }
 
 
-    def paypal(self, list):
-        email = input("Indique su correo de paypal: ")
-        password = input("Indique su contraseña de paypal: ")
-
-        list.extend([email, password])
-
-
-    def bizum(self, list):
-        phone = input("Indique su número de teléfono: ")
-        pin = input("Indique el PIN de bizum: ")
-
-        list.extend([phone, pin])
-
-
-    def card(self, list):
-        phone = input("Indique su número de teléfono: ")
-        pin = input("Indique el PIN de bizum: ")
-
-        list.extend([phone, pin])
-
-
     def _check_credentials(self, username, payment):
         if check_if_user_exists(username):
             lower_payment = payment.lower()
             payment_file = file_as_list(self.PAYMENTS_FILE)
-
             for line in payment_file:
-                if not line[username][lower_payment]: # Si la lista está vacía
+                if not line[username][lower_payment]:
+                    return line['payment'][lower_payment]
+                else:
                     if lower_payment == "paypal":
                         pass
 
@@ -67,20 +45,24 @@ class Payment:
             return False
 
 
-    # Añadir función "devolver métodos de pago"
-
 
 class Card(Payment):
     
-    def __init__(self):
-        self.send_card_gateway()
+    def __init__(self, name, card_number, expiration_date, cvv):
+        self.__name = name
+        self.__card_number = card_number
+        self.__expiration_date = expiration_date
+        self.__cvv = cvv
+
+    def save_payment_info(self):
+        pass
 
 
 
 class Bizum(Payment):
 
     def __init__(self):
-        self.send_bizum_gateway()
+        self.__send_bizum_gateway()
 
 
     def _check_credentials(self, tel_num, pin):
@@ -93,7 +75,7 @@ class Bizum(Payment):
         return False
         
 
-    def send_bizum_gateway(self):
+    def __send_bizum_gateway(self):
         
         tel_num = input("Introduzca su número de teléfono: ")
         pin = input("Introduzca su PIN de bizum (4 dígitos): ")
@@ -108,10 +90,25 @@ class Bizum(Payment):
 class PayPal(Payment):
     
     def __init__(self):
-        self.send_paypal_gateway()
+        self.__send_paypal_gateway()
+        
+
+    def file_as_list(self):
+        with open(self.PAYMENTS_FILE, "r") as f:
+            return [json.loads(credentials) for credentials in f.readlines()]
 
 
-    def send_paypal_gateway(self):
+    def _check_credentials(self, email, password):
+        cred_l = self.file_as_list(self.PAYMENTS_FILE)
+
+        for credentials in cred_l:
+            if email == credentials["email"] and password == credentials["password"]:
+                return True
+
+        return False
+
+
+    def __send_paypal_gateway(self):
         
         email = input("Introduzca su email de paypal: ")
         password = input("Introduzca su contraseña de paypal: ")
