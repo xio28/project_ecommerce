@@ -30,19 +30,28 @@ class Payment:
             }
 
 
-    def _check_credentials(self, username, payment):
+    def _check_credentials(self, username, payment, index):
         if check_if_user_exists(username):
             lower_payment = payment.lower()
             payment_file = file_as_list(self.PAYMENTS_FILE)
+
             for line in payment_file:
-                if not line[username][lower_payment]:
-                    return line['payment'][lower_payment]
+                if not line[username][lower_payment]: # Si la lista está vacía
+                    return False
+
                 else:
-                    if lower_payment == "paypal":
-                        pass
+                    return line[username][lower_payment][index]
 
         else:
             return False
+
+
+    def _add_payment_to_file(self):
+        payment_file = file_as_list(self.PAYMENTS_FILE)
+
+    # Añadir función "devolver métodos de pago"
+    def _return_payment(self):
+        pass
 
 
 
