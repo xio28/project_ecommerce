@@ -72,8 +72,11 @@ class Payment:
 
 class Card(Payment):
     
-    def __init__(self):
-        self.send_card_gateway()
+    def __init__(self, name, card_num, expiration_date, cvv):
+        self.__name = name
+        self.__card_num = card_num
+        self.__expiration_date = expiration_date
+        self.__cvv = cvv
 
 
 
