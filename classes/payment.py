@@ -33,24 +33,23 @@ class Payment:
 
 
     def _check_credentials(self, username, payment):
-        if check_if_user_exists(username):
-            payment_file = file_as_list(self.PAYMENTS_FILE)
+        payment_file = load_bin_file(self.PAYMENTS_FILE)
+        dic = payment_file.__dict__
 
-            for line in payment_file:
-                if not line[username]: # Si la lista está vacía
-                    return False
-
-                else:
-                    self.get_credentials(self, self.PAYMENTS_FILE, username, payment)
+        if dic["_username"] == username:
+            if payment.lower() == "bizum":
+                pass
 
         else:
-            return False
+            self._get_credentials(self, self.PAYMENTS_FILE, username, payment)
 
 
-    def get_credentials(self, filename, username, payment):
-        file = load_bin_file(filename)
-        dic = file.__dict__
+
+    def _get_credentials(self, filename, username, payment):
+        payment_file = load_bin_file(filename)
+        dic = payment_file.__dict__
         l = []
+
         if dic["_username"] == username:
             if payment.lower() == "bizum":
                 l.extend([dic["_phone"], dic["_pin"]])
@@ -65,7 +64,7 @@ class Payment:
 
 
 
-    def add_payment_to_file(self, username, obj):
+    def _add_payment_to_file(self, username, obj):
 
         if check_if_user_exists(username):
 
@@ -124,7 +123,7 @@ bizum = Bizum("ilos28", "678678678", "0505")
 paypal = PayPal("ilos28", "xiomara@gmail.com", "holaMundo")
 card = Card("ilos28", "Siomara Alonso", "8124145314781564", "02/26", "333")
 
-print(payment.add_payment_to_file("ilos28", bizum))
-print(payment.add_payment_to_file("ilos28", paypal))
-print(payment.add_payment_to_file("ilos28", card))
+print(payment._add_payment_to_file("ilos28", bizum))
+print(payment._add_payment_to_file("ilos28", paypal))
+print(payment._add_payment_to_file("ilos28", card))
 # print(payment.see_file(aux_file, "ilos28"))
