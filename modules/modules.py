@@ -1,7 +1,7 @@
 import json
 import pickle
-from os import stat, path
-from pathlib import Path
+import os
+# from pathlib import Path
 
 CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
 # CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
@@ -13,18 +13,46 @@ def file_as_list(filename):
 
 
 
-def load_bin_file(filename):
-    if check_if_file_exists(filename):
-        with open(filename, "rb") as f:
-            return [pickle.load(f)]
-
-
-
 def last_key(dict):
     if not bool(dict):
         return dict.get('id', 1)
     else:
         return dict.get('id') + 1
+
+
+
+def get_file_payment(payment):
+    if payment.lower() == "paypal":
+        # return "/home/cfgs1/Documentos/repo/project_ecommerce/database/paypal.txt"
+        return r"C:\xampp\htdocs\project_ecommerce\database\paypal.txt"
+
+    elif payment.lower() == "bizum":
+        # return "/home/cfgs1/Documentos/repo/project_ecommerce/database/bizum.txt"
+        return r"C:\xampp\htdocs\project_ecommerce\database\bizum.txt"
+
+    else:
+        # return "/home/cfgs1/Documentos/repo/project_ecommerce/database/card.txt"
+        return r"C:\xampp\htdocs\project_ecommerce\database\card.txt"        
+
+
+def load_bin_file(filename):
+    if check_if_file_not_empty(filename):
+        with open(filename, "rb") as f:
+            return pickle.load(f)
+
+
+
+def count_events(keyword, payment):
+
+    # Cuenta el número de veces que determinado valor aparece en el diccionario, si es mayor que 1 es que ya existe.
+    p_file = load_bin_file(get_file_payment(payment))
+    dic = p_file.__dict__
+    s = sum(value == keyword for value in dic.values())
+
+    if s > 1:
+        return False
+    else:
+        return True
 
 
 
@@ -82,8 +110,8 @@ def write_pickle(new_data, filename):
 
 
 
-def check_if_file_exists(filename):
-    if path.getsize(filename) > 0:
+def check_if_file_not_empty(filename):
+    if os.path.getsize(filename) > 0:
         return True
     else:
         return False
@@ -103,3 +131,5 @@ def check_if_file_exists(filename):
 
 #     except (FileNotFoundError, IOError):
 #         return False
+
+# count_events("ilos28", "bizum")

@@ -1,12 +1,8 @@
-import json
 import pickle
 from sys import path
-from os import name
 
-if name == "nt":
-    path.append(r"C:\xampp\htdocs\project_ecommerce")
-else:
-    path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
+path.append(r"C:\xampp\htdocs\project_ecommerce")
+# path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
 
 from modules.clear import *
 from modules.modules import *
@@ -16,7 +12,7 @@ from client import *
 class Payment:
 
     # PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
-    PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
+    # PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
 
     def __init__(self):
         self._operation = {}
@@ -33,7 +29,7 @@ class Payment:
 
 
     def _check_credentials(self, username, payment):
-        payment_file = load_bin_file(self.PAYMENTS_FILE)
+        payment_file = load_bin_file(get_file_payment(payment))
         dic = payment_file.__dict__
 
         if dic["_username"] == username:
@@ -41,48 +37,52 @@ class Payment:
                 pass
 
         else:
-            self._get_credentials(self, self.PAYMENTS_FILE, username, payment)
+            self._get_credentials(self, username, payment)
 
 
 
-    def _get_credentials(self, filename, username, payment):
-        payment_file = load_bin_file(filename)
-        dic = payment_file.__dict__
+    def _get_credentials(self, username, payment):
+        payment_file = load_bin_file(get_file_payment(payment))
         l = []
+        print(len(payment_file))
 
-        if dic["_username"] == username:
-            if payment.lower() == "bizum":
-                l.extend([dic["_phone"], dic["_pin"]])
+        for p in payment_file:
+            dic = p.__dict__
+            print(dic)
+            # if dic["_username"] == username:
+            #     if payment.lower() == "bizum":
+            #         l.extend([dic["_phone"], dic["_pin"]])
 
-            elif payment.lower() == "paypal":
-                l.extend([dic["_email"], dic["_password"]])
+            #     elif payment.lower() == "paypal":
+            #         l.extend([dic["_email"], dic["_password"]])
 
-            else:
-                l.extend([dic["_name"], dic["_card_number"], dic["_expiration_date"], dic["_cvv"]])
-        
-        return l
+            #     else:
+            #         l.extend([dic["_name"], dic["_card_number"], dic["_expiration_date"], dic["_cvv"]])
+            
+            # return l
 
 
 
-    def _add_payment_to_file(self, username, obj):
-
+    def _add_payment_to_file(self, username, payment, *obj):
         if check_if_user_exists(username):
+            l_obj = []
+            l_obj.append(obj)
+            # print(l_obj)
 
             try:
-                with open(self.PAYMENTS_FILE, 'ab') as f:
-                    pickle.dump(obj, f)
+                # if count_events(username, payment):
+                with open(get_file_payment(payment), 'ab') as f:
+                    pickle.dump(l_obj, f)
+
+                # else:
+                    # return False
 
             except (FileNotFoundError, IOError):
-                with open(self.PAYMENTS_FILE, 'wb') as f:
-                    pickle.dump(obj, f)
+                with open(get_file_payment(payment), 'wb') as f:
+                    pickle.dump(l_obj, f)
                         
         else:
             return False
-
-
-    # Añadir función "devolver métodos de pago"
-    def _return_payment(self):
-        pass
 
 
 
@@ -119,11 +119,20 @@ class Bizum:
         
 
 payment = Payment()
-bizum = Bizum("ilos28", "678678678", "0505")
+bizum_1 = Bizum("ilos28", "678678678", "0505")
+bizum_2 = Bizum("carcoal", "678945123", "1111")
 paypal = PayPal("ilos28", "xiomara@gmail.com", "holaMundo")
 card = Card("ilos28", "Siomara Alonso", "8124145314781564", "02/26", "333")
 
-print(payment._add_payment_to_file("ilos28", bizum))
-print(payment._add_payment_to_file("ilos28", paypal))
-print(payment._add_payment_to_file("ilos28", card))
-# print(payment.see_file(aux_file, "ilos28"))
+bizum_f = r"C:\xampp\htdocs\project_ecommerce\database\bizum.txt"
+paypal_f = r"C:\xampp\htdocs\project_ecommerce\database\paypal.txt"
+card_f = r"C:\xampp\htdocs\project_ecommerce\database\card.txt"
+
+l = [bizum_1, bizum_2]
+# l.extend([bizum_1, bizum_2])
+payment._add_payment_to_file("ilos28", "bizum", bizum_1, bizum_2)
+# payment._add_payment_to_file("carcoal", "bizum", bizum_2)
+# payment._add_payment_to_file("ilos28", "PAYPAL", paypal)
+# payment._add_payment_to_file("ilos28", "card", card)
+print(payment._get_credentials("carcoal", "bizum"))
+# payment._check_credentials("ilos28", "card")
