@@ -35,26 +35,6 @@ def get_file_payment(payment):
         return r"C:\xampp\htdocs\project_ecommerce\database\card.txt"        
 
 
-def load_bin_file(filename):
-    if check_if_file_not_empty(filename):
-        with open(filename, "rb") as f:
-            return pickle.load(f)
-
-
-
-def count_events(keyword, payment):
-
-    # Cuenta el número de veces que determinado valor aparece en el diccionario, si es mayor que 1 es que ya existe.
-    p_file = load_bin_file(get_file_payment(payment))
-    dic = p_file.__dict__
-    s = sum(value == keyword for value in dic.values())
-
-    if s > 1:
-        return False
-    else:
-        return True
-
-
 
 def check_if_user_exists(username):
     try:
@@ -71,6 +51,22 @@ def check_if_user_exists(username):
 
 
 
+def user_in_payments_file(username, payment):
+    try:
+        payments_file = file_as_list(get_file_payment(payment))
+
+        for user in payments_file:
+            for x in user:
+                if user['username'] == username:
+                    return True
+            
+                return False
+
+    except (FileNotFoundError, IOError):
+        return False
+
+
+
 def get_client_info(username, key):
     if check_if_user_exists(username):
         clients_file = file_as_list(CLIENTS_FILE)
@@ -81,25 +77,14 @@ def get_client_info(username, key):
 
 
 
-def write_json(new_data, filename):
+def write_json(obj, filename):
     try:
         with open(filename, 'a') as f:
-            f.write(json.dumps(new_data) + '\n')
+            f.write(json.dumps(obj.__dict__) + '\n')
 
     except (FileNotFoundError, IOError):
         with open(filename, 'w') as f:
-            f.write(json.dumps(new_data) + '\n')
-
-
-
-def write_pickle(new_data, filename):
-    try:
-        with open(filename, 'ab') as f:
-            f.write(pickle.dumps(new_data) + '\n')
-
-    except (FileNotFoundError, IOError):
-        with open(filename, 'wb') as f:
-            f.write(pickle.dumps(new_data) + '\n')
+            f.write(json.dumps(obj.__dict__) + '\n')
 
 
 

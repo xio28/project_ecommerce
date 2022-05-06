@@ -28,28 +28,16 @@ class Client:
         self._nid = nid
         self._address = address
         self._contact = contact
-        self.store_user_info()
-        self.store_user_payment_info()
 
 
-    def store_user_info(self):
-
-        user_info = {
-            "username": self._username,
-            "email": self._email,
-            "password": self.__password,
-            "name": self._name,
-            "NID": self._nid,
-            "phone": self._contact,
-            "address": self._address
-        }
+    def _store_user_info(self, username, obj):
 
         try:
-            if check_if_user_exists(self._username):
+            if check_if_user_exists(username):
                 print("El usuario ya existe.")
                 return False
             else:
-                write_json(user_info, self.CLIENTS_FILE)
+                write_json(self.CLIENTS_FILE)
                 return True
 
         except (FileNotFoundError, IOError):
@@ -57,7 +45,7 @@ class Client:
             return True
             
     
-    def store_user_payment_info(self):
+    def _store_user_payment_info(self):
         payment_info = {
             self._username: {
                 "card": [],
