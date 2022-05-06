@@ -1,7 +1,5 @@
-import sys
-from os import name
+import os
 
-if name == "nt":
-    sys.path.append(r"C:\xampp\htdocs\project_ecommerce")
-else:
-    sys.path.append("/home/1cfgs/...")
+abs_path = os.getcwd()
+
+print(os.path.relpath("git_commands.txt", abs_path))

@@ -3,8 +3,8 @@ import pickle
 import os
 # from pathlib import Path
 
-CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
-# CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
+# CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
+CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
 
 
 def file_as_list(filename):
@@ -23,16 +23,16 @@ def last_key(dict):
 
 def get_file_payment(payment):
     if payment.lower() == "paypal":
-        # return "/home/cfgs1/Documentos/repo/project_ecommerce/database/paypal.txt"
-        return r"C:\xampp\htdocs\project_ecommerce\database\paypal.txt"
+        return "/home/cfgs1/Documentos/repo/project_ecommerce/database/paypal.txt"
+        # return r"C:\xampp\htdocs\project_ecommerce\database\paypal.txt"
 
     elif payment.lower() == "bizum":
-        # return "/home/cfgs1/Documentos/repo/project_ecommerce/database/bizum.txt"
-        return r"C:\xampp\htdocs\project_ecommerce\database\bizum.txt"
+        return "/home/cfgs1/Documentos/repo/project_ecommerce/database/bizum.txt"
+        # return r"C:\xampp\htdocs\project_ecommerce\database\bizum.txt"
 
     else:
-        # return "/home/cfgs1/Documentos/repo/project_ecommerce/database/card.txt"
-        return r"C:\xampp\htdocs\project_ecommerce\database\card.txt"        
+        return "/home/cfgs1/Documentos/repo/project_ecommerce/database/card.txt"
+        # return r"C:\xampp\htdocs\project_ecommerce\database\card.txt"        
 
 
 
@@ -60,7 +60,23 @@ def user_in_payments_file(username, payment):
                 if user['username'] == username:
                     return True
             
-                return False
+        return False
+
+    except (FileNotFoundError, IOError):
+        return False
+
+
+
+def user_in_file(username, filename):
+    try:
+        filename = file_as_list(filename)
+
+        for user in filename:
+            for x in user:
+                if user['username'] == username:
+                    return True
+            
+        return False
 
     except (FileNotFoundError, IOError):
         return False

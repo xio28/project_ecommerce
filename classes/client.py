@@ -17,7 +17,6 @@ class Client:
     # CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
     # PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
     CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
-    PAYMENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/payments_info.txt"
     
 
     def __init__(self, username, email, password, name, nid, address, contact):
@@ -41,7 +40,7 @@ class Client:
                 return True
 
         except (FileNotFoundError, IOError):
-            write_json(user_info, self.CLIENTS_FILE)
+            write_json(obj, self.CLIENTS_FILE)
             return True
             
     
@@ -53,9 +52,6 @@ class Client:
                 "bizum": []
             }
         }
-        
-        if not self.store_user_info():
-            write_json(payment_info, self.PAYMENTS_FILE)
 
 
         # db.clients.insert_one(user_info)
