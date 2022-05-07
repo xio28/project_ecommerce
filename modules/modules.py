@@ -1,6 +1,8 @@
 import json
 import os
-from files import *
+from modules.files import *
+
+
 
 def file_as_list(filename):
     with open(filename, "r") as f:

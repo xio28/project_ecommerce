@@ -67,4 +67,4 @@ client2 = Client("carcoal", "adiosMundo", "chris@gmail.com", "Chris Medina", "33
 
 # client.add_user_info_to_file("ilos28", client1)
 # client.add_user_info_to_file("carcoal", client2)
-client.check_credentials_login("ilos28", "holaMundo")
+client.check_credentials_login("ilos28", "holaMund")
