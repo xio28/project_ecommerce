@@ -8,54 +8,63 @@ else:
 
 from modules.clear import *
 from modules.modules import *
+from modules.files import *
 # from database.connect_db import *
 
 clear()
 
 class Client:
 
-    # CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
-    # PAYMENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\payments_info.txt"
-    CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
-    
-
-    def __init__(self, username, email, password, name, nid, address, contact):
-        self._username = username
+    def __init__(self, username = "", password = "", email = "", name = "", nid = "", address = {}, contact = []):
+        self.username = username
+        self._password = password
         self._email = email
-        self.__password = password
         self._name = name
         self._nid = nid
         self._address = address
         self._contact = contact
 
 
-    def _store_user_info(self, username, obj):
 
+    def add_user_info_to_file(self, username, obj):
         try:
-            if check_if_user_exists(username):
-                print("El usuario ya existe.")
-                return False
-            else:
-                write_json(self.CLIENTS_FILE)
-                return True
+            if not check_if_user_exists(username):
+                write_json(obj, CLIENTS_FILE)
 
+            else:
+                print("El usuario  ya existe.")
+                
         except (FileNotFoundError, IOError):
-            write_json(obj, self.CLIENTS_FILE)
-            return True
+            write_json(obj, CLIENTS_FILE)
+
+
+
+    def check_credentials_login(self, username, password):
+        if check_if_user_exists(username):
+            clients_info = file_as_list(CLIENTS_FILE)
             
-    
-    def _store_user_payment_info(self):
-        payment_info = {
-            self._username: {
-                "card": [],
-                "paypal": [],
-                "bizum": []
-            }
-        }
+            for info in clients_info:
+                for x in info:
+                    if info["username"] == username and info["_password"] == password:
+                        return True
+
+                    else:
+                        print("Credenciales incorrectas.")
+                        return False
+        
+        else:
+            print("El usuario no existe.")
+            
 
 
         # db.clients.insert_one(user_info)
 
+client = Client()
 
-# client1 = Client("ilos28", "holaMundo", "xiomara@gmail.com", "Siomara Alonso", "44444444T", {"street": "C/Torres 1, 2º D", "postal_code": "35017", "city": "Las Palmas de G.C."}, ["678678678", "696696696"])
-# client2 = Client("carcoal", "holaMundo", "chris@gmail.com", "Chris Medina", "33333333T", {"street": "C/Vega 1, 3º D", "postal_code": "35022", "city": "Telde"}, ["645124753"])
+client1 = Client("ilos28", "holaMundo", "xiomara@gmail.com", "Siomara Alonso", "44444444T", {"street": "C/Torres 1, 2º D", "postal_code": "35017", "city": "Las Palmas de G.C."}, ["678678678", "696696696"])
+client2 = Client("carcoal", "adiosMundo", "chris@gmail.com", "Chris Medina", "33333333T", {"street": "C/Vega 1, 3º D", "postal_code": "35022", "city": "Telde"}, ["645124753"])
+
+
+# client.add_user_info_to_file("ilos28", client1)
+# client.add_user_info_to_file("carcoal", client2)
+client.check_credentials_login("ilos28", "holaMundo")

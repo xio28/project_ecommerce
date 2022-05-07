@@ -1,11 +1,6 @@
 import json
-import pickle
 import os
-# from pathlib import Path
-
-# CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\client_info.txt"
-CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/client_info.txt"
-
+from files import *
 
 def file_as_list(filename):
     with open(filename, "r") as f:
@@ -23,16 +18,13 @@ def last_key(dict):
 
 def get_file_payment(payment):
     if payment.lower() == "paypal":
-        return "/home/cfgs1/Documentos/repo/project_ecommerce/database/paypal.txt"
-        # return r"C:\xampp\htdocs\project_ecommerce\database\paypal.txt"
+        return PAYPAL
 
     elif payment.lower() == "bizum":
-        return "/home/cfgs1/Documentos/repo/project_ecommerce/database/bizum.txt"
-        # return r"C:\xampp\htdocs\project_ecommerce\database\bizum.txt"
+        return BIZUM
 
     else:
-        return "/home/cfgs1/Documentos/repo/project_ecommerce/database/card.txt"
-        # return r"C:\xampp\htdocs\project_ecommerce\database\card.txt"        
+        return CARD 
 
 
 
@@ -101,13 +93,6 @@ def write_json(obj, filename):
     except (FileNotFoundError, IOError):
         with open(filename, 'w') as f:
             f.write(json.dumps(obj.__dict__) + '\n')
-
-
-
-# def if_file_exists(filename):
-#     my_file = Path(filename)
-    
-#     return my_file.is_file()
 
 
 
