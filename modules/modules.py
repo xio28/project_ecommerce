@@ -74,6 +74,18 @@ def user_in_file(username, filename):
 
 
 
+def check_id(id, filename):
+    filename = file_as_list(filename)
+    
+    for info in filename:
+        for x in info:
+            if info['id'] == id:
+                return True
+        
+    return False
+
+
+
 def get_client_info(username, key):
     if check_if_user_exists(username):
         clients_file = file_as_list(CLIENTS_FILE)

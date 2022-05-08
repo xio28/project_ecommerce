@@ -1,6 +1,10 @@
 from sys import path
-# path.append(r"C:\xampp\htdocs\project_ecommerce")
-path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
+from os import name
+
+if name == "nt":
+    path.append(r"C:\xampp\htdocs\project_ecommerce")
+else:
+    path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
 
 
 from modules.modules import *

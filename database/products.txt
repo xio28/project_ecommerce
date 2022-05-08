@@ -1,0 +1,6 @@
+{"id": 1, "p_name": "Nature's Variety Original Medium Adult pollo", "species": "perro", "category": "pienso", "price": 0}
+{"id": 2, "p_name": "Salvaje Base Esterilizado pienso", "species": "gato", "category": "pienso", "price": 0}
+{"id": 3, "p_name": "Alpha Spirit Alb\u00f3ndigas de Ciervo con Romero", "species": "perro", "category": "comida h\u00fameda", "price": 0}
+{"id": 4, "p_name": "Wellness Core Tender Cuts Chicken Selection", "species": "gato", "category": "comida h\u00fameda", "price": 0}
+{"id": 5, "p_name": "Nayeco X-TRM Cronos Ne\u00f3n Lim\u00f3n arn\u00e9s", "species": "perro", "category": "arneses", "price": 0}
+{"id": 6, "p_name": "Sepicat Light Weight Extreme Fresh arena aglomerante ligera", "species": "gato", "category": "arena", "price": 0}
