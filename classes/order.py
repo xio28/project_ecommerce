@@ -9,8 +9,6 @@ from modules.clear import *
 
 clear()
 
-ORDERS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/orders_info.txt"
-
 class Order:
     
     def __init__(self, username = "", order = [], total = 0):

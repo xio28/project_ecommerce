@@ -1,6 +1,7 @@
 from os import name
 
 if name == "nt":
+    COMMERCE_FILE = r"C:\xampp\htdocs\project_ecommerce\database\commerce_info.txt"
     CLIENTS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\clients_info.txt"
     ORDERS_FILE = r"C:\xampp\htdocs\project_ecommerce\database\orders_info.txt"
     SUPPLIERS = r"C:\xampp\htdocs\project_ecommerce\database\suppliers.txt"
@@ -11,6 +12,7 @@ if name == "nt":
     CARD = r"C:\xampp\htdocs\project_ecommerce\database\card.txt"
 
 else:
+    COMMERCE_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/commerce_info.txt"
     CLIENTS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/clients_info.txt"
     ORDERS_FILE = "/home/cfgs1/Documentos/repo/project_ecommerce/database/orders_info.txt"
     SUPPLIERS = "/home/cfgs1/Documentos/repo/project_ecommerce/database/suppliers.txt"

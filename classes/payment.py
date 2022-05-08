@@ -1,9 +1,7 @@
-# import pickle
-import json
 from sys import path
 
-# path.append(r"C:\xampp\htdocs\project_ecommerce")
-path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
+path.append(r"C:\xampp\htdocs\project_ecommerce")
+# path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
 
 from modules.clear import *
 from modules.modules import *

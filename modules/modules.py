@@ -8,13 +8,10 @@ def file_as_list(filename):
     with open(filename, "r") as f:
         return [json.loads(x) for x in f.readlines()]
 
+        
 
-
-def last_key(dict):
-    if not bool(dict):
-        return dict.get('id', 1)
-    else:
-        return dict.get('id') + 1
+def last_key(l_dict):
+    return 1 if l_dict[0]['id'] == 0 else l_dict[-1]['id'] + 1
 
 
 
@@ -98,11 +95,11 @@ def write_json(obj, filename):
 
 
 
-def check_if_file_not_empty(filename):
+def check_if_file_empty(filename):
     if os.path.getsize(filename) > 0:
-        return True
-    else:
         return False
+    else:
+        return True
     
 
 # Comprueba si una condición (nombre, número, etc.) está dentro del diccionario
