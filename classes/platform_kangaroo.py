@@ -1,3 +1,4 @@
+from re import S
 from sys import path
 from os import name
 
@@ -12,10 +13,11 @@ from modules.files import *
 
 class KangarooPlatform:
 
-    def __init__(self, nif = "", ecommerce_name = "", address = ""):
+    def __init__(self, nif = "", ecommerce_name = "", address = "", products = {}):
         self.nif = nif
         self.ecommerce_name = ecommerce_name
         self.address = address
+        self.products = products # Mirar a ver qué hacer con esto
 
 
 
@@ -37,17 +39,15 @@ class KangarooPlatform:
         commerce_info = file_as_list(COMMERCE_FILE)
         
         for info in commerce_info:
-            for x in info:
-                commerce_info = fr'''
-{info['ecommerce_name']}
-{info['nif']}
-{info['address']['street']}
-{info['address']['postal_code']}
-{info['address']['city']}
-                    '''
+            commerce_info = {
+                'nid': info['nif'],
+                'name': info['ecommerce_name'],
+                'address': info['address']['street'],
+                'address': info['address']['postal_code'],
+                'address': info['address']['city']
+                }
 
-        return commerce_info
-        
+            return commerce_info
 
 
 c = KangarooPlatform()

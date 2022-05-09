@@ -26,6 +26,16 @@ class Supplier:
             write_json(obj, SUPPLIERS)
 
 
+    def get_suppliers_list(self):
+        suppliers_file = file_as_list(SUPPLIERS)
+        l_suppliers = []
+
+        for supplier in suppliers_file:
+            l_suppliers.append(supplier['name'])
+
+        return l_suppliers
+
+
 
 s = Supplier()
 s1 = Supplier(1, "28769037Q", "Isabel Román-Ariño", "C/Libertad, 68, 04869, Almería", "750756063")

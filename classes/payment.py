@@ -1,4 +1,6 @@
+from ast import operator
 from sys import path
+# import json
 
 path.append(r"C:\xampp\htdocs\project_ecommerce")
 # path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
@@ -9,27 +11,62 @@ from order import *
 from client import *
 import datetime
 
+today = datetime.datetime.now().strftime("%d-%m-%Y, %H:%M:%S")
+
 class Payment:
 
-    def __init__(self):
-        self._operation = {}
+    def __init__(self, operation = {}):
+        self.operation = operation
 
 
-
-    def pay_order(self):
-        pass
-
-
-
-    def get_order_total_cost(self, username, payment):
-        operation_file = file_as_list()
-
-        self._operation = {
-            'id': last_key(operation_file),
-            'order': [username, self.calc_total()], 
-            'payment': payment,
-            'state': self.pay_order()
+    def pay_order(self, username, datetime, payment, entry):
+        orders_file = file_as_list(ORDERS_FILE)
+        state = True
+        total = 0
+        
+        with open(ORDERS_FILE, 'w') as f:
+            for order in orders_file:
+                if order['username'] == username and order['datetime'] == datetime and self.check_credentials(username, payment, entry):
+                    order['state'] = "pagado"
+                    state = True
+                    total = order['total']
+                
+                else:
+                    order['state'] = "no pagado"
+                    state = False
+            
+            f.write(json.dumps(order))
+    
+        if state:
+            operation = {
+                'id': 0,
+                'payment': payment,
+                'datetime': today,
+                'total': total
             }
+
+        obj = Payment(operation)
+
+        write_json(obj, OPERATIONS)
+
+
+
+
+    def check_credentials(self, username, payment, entry):
+        l1 = self.get_credentials(username, payment).sort()
+        l2 = entry.sort()
+
+        if user_in_payments_file(username, payment):
+            if l1 == l2:
+                return True
+            
+            else:
+                print("Credenciales incorrectas. Por favor, asegúrese de que estén bien escritas.")
+        
+        else:
+            print("No tiene credenciales asociadas a este método de pago. Por favor, añadalas primero al fichero para poder continuar con el pago.")
+
+            return False
 
 
 
@@ -56,10 +93,10 @@ class Payment:
         return l
 
 
+
     # Añade objeto a la lista de métodos de pago correspondiente; payment = (bizum \ paypal \ card)
     def add_payment_to_file(self, username, payment, obj):
         if check_if_user_exists(username):
-            # print("hola")
             try:
                 if not user_in_payments_file(username, payment):
                     write_json(obj, get_file_payment(payment))
@@ -71,8 +108,11 @@ class Payment:
 
             except (FileNotFoundError, IOError):
                 write_json(obj, get_file_payment(payment))
+                   
                         
 
+    def payment_l(self):
+        return ["paypal", "bizum", "tarjeta"]
 
 
 class Card:
@@ -116,4 +156,5 @@ card = Card("ilos28", "Siomara Alonso", "8124145314781564", "02/26", "333")
 # payment.add_payment_to_file("ilos28", "PAYPAL", paypal)
 # payment.add_payment_to_file("ilos28", "card", card)
 # print(payment.get_credentials("ilos28", "paypal"))
-print(payment.get_credentials("ilos28", "bizum"))
+# print(payment.get_credentials("ilos28", "bizum"))
+# print(payment.pay_order("ilos28", "09-05-2022", "bizum", ["678678678", "0505"]))

@@ -1,0 +1,1 @@
+{"invoice": {"id": 1, "user_info": {"name": "Siomara Alonso", "nid": "44444444T", "address": "Las Palmas de G.C."}, "commerce_info": {"nid": "B95368213", "name": "Kangaroo SL", "address": "Las Palmas de Gran Canaria"}, "order": true, "datetime": "09-05-2022 17:28:08"}}
