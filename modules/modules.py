@@ -1,8 +1,16 @@
+from os import name
+from sys import path
+
+if name == "nt":
+    path.append(r"C:\xampp\htdocs\project_ecommerce")
+else:
+    path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
+
 import json
-import os
 from modules.files import *
+from modules.clear import *
 
-
+clear()
 
 def file_as_list(filename):
     with open(filename, "r") as f:
@@ -10,10 +18,38 @@ def file_as_list(filename):
 
         
 
-def last_key(l_dict):
-    return 1 if l_dict[0]['id'] == 0 else l_dict[-1]['id'] + 1
+def auto_key(filename):
+    pass
+    # info_file = file_as_list(filename)
+    # n = 1
+    # n_l = []
+    
+    # for x in info_file:
+    #     if x['id'] == 0:
+    #         if info_file.index(x) == 0:
+    #             x['id'] = n
+    #             n_l.append(x)
+            
+    #         else:
+    #             x['id'] += n
+    #             n_l.append(x)
+        
+    #     n += 1
+    
+    # with open(filename, 'w') as f:
+    #     for x in n_l:
+    #         for n in x:
+    #             print(n)
+                # if x['id'] == 0:
+                #     f.write(json.dumps(x) + "\n")
+                # else:
+                #     return False
+    
+    # return n_l
+    # return 1 if l_dict[0]['id'] == 0 else l_dict[-1]['id'] + 1
 
 
+# print(auto_key(PRODUCTS))
 
 def get_file_payment(payment):
     if payment.lower() == "paypal":
@@ -74,15 +110,15 @@ def user_in_file(username, filename):
 
 
 
-def check_id(id, filename):
-    filename = file_as_list(filename)
+# def check_id(id, filename):
+#     filename = file_as_list(filename)
     
-    for info in filename:
-        for x in info:
-            if info['id'] == id:
-                return True
+#     for info in filename:
+#         for x in info:
+#             if info['id'] == id:
+#                 return True
         
-    return False
+#     return False
 
 
 

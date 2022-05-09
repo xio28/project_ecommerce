@@ -6,9 +6,9 @@ if name == "nt":
 else:
     path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
 
+from modules.files import *
 from modules.modules import *
 from modules.clear import *
-from modules.files import *
 
 class Products:
 
@@ -20,17 +20,26 @@ class Products:
         self.price = price
 
 
+
     def add_products_to_file(self, obj):
         try:
-            if check_id(id, PRODUCTS):
-                write_json(obj, PRODUCTS)
+            write_json(obj, PRODUCTS)
 
-            else:
-                print("El producto ya se encuentra en la lista.")
-                return False
-                
         except (FileNotFoundError, IOError):
             write_json(obj, PRODUCTS)
+
+    
+
+    def get_item_price(self, p_name):
+        products_file = file_as_list(PRODUCTS)
+        price = 0
+
+        for product in products_file:
+            if product['p_name'] == p_name:
+                price = product['price']
+
+        return price
+
 
 
     def return_products(self):
@@ -60,4 +69,5 @@ p6 = Products(6, "Sepicat Light Weight Extreme Fresh arena aglomerante ligera 16
 # p.add_products_to_file(p4)
 # p.add_products_to_file(p5)
 # p.add_products_to_file(p6)
-print(p.return_products())
+# print(p.return_products())
+print(p.get_item_price("Nature's Variety Original Medium Adult pollo 12kg"))

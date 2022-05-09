@@ -1,0 +1,3 @@
+{"nif": "28769037Q", "name": "Isabel Rom\u00e1n-Ari\u00f1o", "address": "C/Libertad, 68, 04869, Almer\u00eda", "contact": "750756063"}
+{"nif": "19652938J", "name": "Camilo Verd\u00fa Sala", "address": "C/R\u00faa de San Pedro, 96, 37830, Salamanca", "contact": "660340815"}
+{"nif": "12590367Y", "name": "Araceli Concha Pi Guijarro", "address": "C/Manuel Iradier, 42, 03770, Alicante", "contact": "673771979"}

@@ -1,1 +1,1 @@
-{"nif": "G12453786", "ecommerce_name": "Kangaroo SL", "address": {"street": "C/ Matagalpa, 2", "postal_code": "35010", "city": "Las Palmas de Gran Canaria"}}
+{"nif": "B95368213", "ecommerce_name": "Kangaroo SL", "address": {"street": "C/ Matagalpa, 2", "postal_code": "35010", "city": "Las Palmas de Gran Canaria"}}

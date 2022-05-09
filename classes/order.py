@@ -39,12 +39,8 @@ class Order:
                 write_json(obj, ORDERS_FILE)
 
 
-    def gen_order_info(self):
-        pass
-        
 
-
-    def calc_total(self, taxes = 0.07): # Añadir un select con la opción de elegir el porcentaje de impuestos
+    def calc_total(self, taxes = 0.07):
         return round(self.calc_subtotal() + (self.calc_subtotal() * taxes), 2)
 
     
@@ -55,6 +51,13 @@ class Order:
             subtotal += (elem[1] * elem[2])
         
         return round(subtotal, 2)
+
+
+    
+    def get_items_to_cart(self, p_name, amount, price):
+        cart = []
+
+
 
 
 order = Order("ilos28", [["item1", 4, 15.59], ["item2", 8, 25.99], ["item3", 2, 5.26]])
