@@ -11,6 +11,7 @@ from modules.modules import *
 
 class Supplier:
     def __init__(self, nif = "", name = "", address = "", contact = ""):
+        self.id = auto_key(SUPPLIERS)
         self.nif = nif
         self.name = name
         self.address = address

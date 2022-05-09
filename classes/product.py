@@ -12,8 +12,8 @@ from modules.clear import *
 
 class Products:
 
-    def __init__(self, id = 0, supplier = "", p_name = "", species = "", category = "", price = 0):
-        self.id = id
+    def __init__(self, supplier = "", p_name = "", species = "", category = "", price = 0):
+        self.id = auto_key(PRODUCTS)
         self.supplier = supplier
         self.p_name = p_name
         self.species = species
@@ -56,18 +56,13 @@ class Products:
 
 
 p = Products()
-p1 = Products(1, "Isabel Román-Ariño", "Nature's Variety Original Medium Adult pollo 12kg", "perro", "pienso", 59.95)
-p2 = Products(2, "Isabel Román-Ariño", "Salvaje Base Esterilizado pienso 12kg", "gato", "pienso", 24.95)
-p3 = Products(3, "Isabel Román-Ariño", "Alpha Spirit Albóndigas de Ciervo con Romero", "perro", "comida húmeda", 2.99)
-p4 = Products(4, "Camilo Verdú Sala", "Wellness Core Tender Cuts Chicken Selection", "gato", "comida húmeda", 6.39)
-p5 = Products(5, "Araceli Concha Pi Guijarro", "Nayeco X-TRM Cronos Neón Limón arnés talla L", "perro", "arneses", 15.29)
-p6 = Products(6, "Araceli Concha Pi Guijarro", "Sepicat Light Weight Extreme Fresh arena aglomerante ligera 16L", "gato", "arena", 14.99)
+p1 = Products("Isabel Román-Ariño", "Nature's Variety Original Medium Adult pollo 12kg", "perro", "pienso", 59.95)
+p2 = Products("Isabel Román-Ariño", "Salvaje Base Esterilizado pienso 12kg", "gato", "pienso", 24.95)
+p3 = Products("Isabel Román-Ariño", "Alpha Spirit Albóndigas de Ciervo con Romero", "perro", "comida húmeda", 2.99)
+p4 = Products("Camilo Verdú Sala", "Wellness Core Tender Cuts Chicken Selection", "gato", "comida húmeda", 6.39)
+p5 = Products("Araceli Concha Pi Guijarro", "Nayeco X-TRM Cronos Neón Limón arnés talla L", "perro", "arneses", 15.29)
+p6 = Products("Araceli Concha Pi Guijarro", "Sepicat Light Weight Extreme Fresh arena aglomerante ligera 16L", "gato", "arena", 14.99)
 
 p.add_products_to_file(p1)
-p.add_products_to_file(p2)
-p.add_products_to_file(p3)
-p.add_products_to_file(p4)
-p.add_products_to_file(p5)
-p.add_products_to_file(p6)
 # print(p.return_products())
 # print(p.get_item_price("Nature's Variety Original Medium Adult pollo 12kg"))

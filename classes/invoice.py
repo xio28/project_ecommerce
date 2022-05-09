@@ -18,28 +18,26 @@ from modules.files import *
 today = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 
 clear()
+
+
 class Invoice:
-    def __init__(self, invoice = {}):
-        self.invoice = invoice
+    def __init__(self, user_info = {}, commerce_info = {}, order = [], datetime = ""):
+        self.id = auto_key(INVOICE)
+        self.user_info = user_info
+        self.commerce_info = commerce_info
+        self.order = order
+        self.datetime = datetime
 
 
 
-    def gen_invoice(self, id, username, datetime):
+    def gen_invoice(self, username, datetime):
 
-        invoice = {
-            "id": id,
-            "user_info": Client.return_client_info(self, username),
-            "commerce_info": KangarooPlatform.return_commerce_info(self),
-            "order": Order.get_order_l(self, username, datetime),
-            "datetime": today
-        }
-
-        obj = Invoice(invoice)
+        obj = Invoice(Client.return_client_info(self, username), KangarooPlatform.return_commerce_info(self), Order.get_order_l(self, username, datetime), today)
 
         write_json(obj, INVOICE)
 
 
 
-inv = Invoice()
+# inv = Invoice()
 
-print(inv.gen_invoice(1, "ilos28", "09-05-2022"))
+# print(inv.gen_invoice("ilos28", "09-05-2022"))

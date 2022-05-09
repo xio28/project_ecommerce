@@ -8,7 +8,6 @@ else:
 
 
 from product import *
-from payment import *
 from modules.modules import *
 from modules.clear import *
 import datetime
@@ -20,23 +19,20 @@ clear()
 
 class Order:
     
-    def __init__(self, id = 0, username = "", order = [], datetime = ""):
-        self.id = id
+    def __init__(self, username = "", order = [], datetime = ""):
+        self.id = auto_key(ORDERS)
         self.username = username
         self.order = order
         self.datetime = datetime
         self.total = self.calc_total()
-        self.state = "no pagado"
+        self.state = False
 
 
 
     def add_order_to_file(self, username, obj):
         if check_if_user_exists(username):
-            try:
-                write_json(obj, ORDERS_FILE)
+            write_json(obj, ORDERS)
                 
-            except (FileNotFoundError, IOError):
-                write_json(obj, ORDERS_FILE)
 
 
 
@@ -53,8 +49,9 @@ class Order:
         return round(subtotal, 2)
 
 
+
     def get_order_l(self, username, datetime):
-        orders_file = file_as_list(ORDERS_FILE)
+        orders_file = file_as_list(ORDERS)
 
         for order in orders_file:
             for x in order:
@@ -62,30 +59,15 @@ class Order:
                     print(order)
                     return True
 
-    # def get_total(username, datetime):
-    #     orders_file = file_as_list(ORDERS_FILE)
-        
-    #     for order in orders_file:
-    #         if order['username'] == username and order['datetime'] == datetime:
-    #             return order['total']
-            
-    
-    # def get_items_to_cart(self, username, p_name, amount):
-    #     cart = [p_name, amount, Products.get_item_price(p_name)]
-    #     self.order.append(cart)
-
-    #     obj = Order(username, self.order, today)
-
-    #     return obj
 
 
 
 
-# order = Order(1, "ilos28", [["Nature's Variety Original Medium Adult pollo 12kg", 1, 59.95], ["Salvaje Base Esterilizado pienso 12kg", 1, 24.95], ["Alpha Spirit Albóndigas de Ciervo con Romero", 3, 2.99]], today)
+# order = Order("ilos28", [["Nature's Variety Original Medium Adult pollo 12kg", 1, 59.95], ["Salvaje Base Esterilizado pienso 12kg", 1, 24.95], ["Alpha Spirit Albóndigas de Ciervo con Romero", 3, 2.99]], today)
 # order.add_order_to_file("ilos28", order)
 # order.get_items_to_cart("Nature's Variety Original Medium Adult pollo 12kg", 1)
 # order.get_items_to_cart("Salvaje Base Esterilizado pienso 12kg", 1)
 
 # print(order.calc_total())
-o = Order()
-print(o.get_order_l("ilos28", "09-05-2022"))
+# o = Order()
+# print(o.get_order_l("ilos28", "09-05-2022"))

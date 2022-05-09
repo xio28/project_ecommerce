@@ -15,8 +15,8 @@ clear()
 
 class Client:
 
-    def __init__(self, id = 0, username = "", password = "", email = "", name = "", nid = "", address = {}, contact = [], recommended = False):
-        self.id = id
+    def __init__(self, username = "", password = "", email = "", name = "", nid = "", address = {}, contact = [], recommended = False):
+        self.id = auto_key(CLIENTS)
         self.username = username
         self._password = password
         self._email = email
@@ -31,19 +31,19 @@ class Client:
     def add_user_info_to_file(self, username, obj):
         try:
             if not check_if_user_exists(username):
-                write_json(obj, CLIENTS_FILE)
+                write_json(obj, CLIENTS)
 
             else:
                 print("El usuario  ya existe.")
                 
         except (FileNotFoundError, IOError):
-            write_json(obj, CLIENTS_FILE)
+            write_json(obj, CLIENTS)
 
 
 
     def check_credentials_login(self, username, password):
         if check_if_user_exists(username):
-            clients_info = file_as_list(CLIENTS_FILE)
+            clients_info = file_as_list(CLIENTS)
             
             for info in clients_info:
                 for x in info:
@@ -61,7 +61,7 @@ class Client:
 
     def return_client_info(self, username):
         if check_if_user_exists(username):
-            clients_info = file_as_list(CLIENTS_FILE)
+            clients_info = file_as_list(CLIENTS)
 
             
             for info in clients_info:

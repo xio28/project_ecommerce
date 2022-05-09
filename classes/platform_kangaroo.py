@@ -23,20 +23,20 @@ class KangarooPlatform:
 
     def add_commerce_to_file(self, obj):
         try:
-            if check_if_file_empty(COMMERCE_FILE):
-                write_json(obj, COMMERCE_FILE)
+            if check_if_file_empty(COMMERCE):
+                write_json(obj, COMMERCE)
             
             else:
                 print("El fichero ya contiene información del comercio.")
                 return False
                 
         except (FileNotFoundError, IOError):
-            write_json(obj, COMMERCE_FILE)
+            write_json(obj, COMMERCE)
     
 
     
     def return_commerce_info(self):
-        commerce_info = file_as_list(COMMERCE_FILE)
+        commerce_info = file_as_list(COMMERCE)
         
         for info in commerce_info:
             commerce_info = {

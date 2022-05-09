@@ -1,51 +1,49 @@
-from ast import operator
 from sys import path
-# import json
+from os import name
 
-path.append(r"C:\xampp\htdocs\project_ecommerce")
-# path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
+if name == "nt":
+    path.append(r"C:\xampp\htdocs\project_ecommerce")
+else:
+    path.append("/home/cfgs1/Documentos/repo/project_ecommerce")
+
 
 from modules.clear import *
 from modules.modules import *
-from order import *
-from client import *
 import datetime
 
 today = datetime.datetime.now().strftime("%d-%m-%Y, %H:%M:%S")
 
 class Payment:
 
-    def __init__(self, operation = {}):
-        self.operation = operation
+    def __init__(self, username = "", payment = "", datetime = "", total = 0):
+        self.id = auto_key(OPERATIONS)
+        self.username = username
+        self.payment = payment
+        self.datetime = datetime
+        self.total = total
 
 
     def pay_order(self, username, datetime, payment, entry):
-        orders_file = file_as_list(ORDERS_FILE)
-        state = True
+        orders_file = file_as_list(ORDERS)
+        state = False
         total = 0
         
-        with open(ORDERS_FILE, 'w') as f:
+        with open(ORDERS, 'w') as f:
             for order in orders_file:
                 if order['username'] == username and order['datetime'] == datetime and self.check_credentials(username, payment, entry):
-                    order['state'] = "pagado"
+                    order['state'] = True
                     state = True
                     total = order['total']
                 
                 else:
-                    order['state'] = "no pagado"
                     state = False
             
-            f.write(json.dumps(order))
+                f.write(json.dumps(order))
     
-        if state:
-            operation = {
-                'id': 0,
-                'payment': payment,
-                'datetime': today,
-                'total': total
-            }
 
-        obj = Payment(operation)
+        if state:
+            obj = Payment(username, payment, today, total)
+
 
         write_json(obj, OPERATIONS)
 
@@ -72,25 +70,25 @@ class Payment:
 
     def get_credentials(self, username, payment):
         payment_file = file_as_list(get_file_payment(payment))
-        l = []
+        cred_l = []
 
         for credentials in payment_file:
             for x in credentials:
                 if credentials["username"] == username:
                     if payment.lower() == "bizum":
-                        l.extend([credentials["_phone"], credentials["_pin"]])
+                        cred_l.extend([credentials["_phone"], credentials["_pin"]])
                         break
 
                     elif payment.lower() == "paypal":
-                        l.extend([credentials["_email"], credentials["_password"]])
+                        cred_l.extend([credentials["_email"], credentials["_password"]])
                         break
 
                     else:
-                        l.extend([credentials["_name"], credentials["_card_number"], credentials["_expiration_date"], credentials["_cvv"]])
+                        cred_l.extend([credentials["_name"], credentials["_card_number"], credentials["_expiration_date"], credentials["_cvv"]])
                         break
 
                 
-        return l
+        return cred_l
 
 
 
@@ -113,6 +111,7 @@ class Payment:
 
     def payment_l(self):
         return ["paypal", "bizum", "tarjeta"]
+
 
 
 class Card:
@@ -146,10 +145,10 @@ class Bizum:
 
 payment = Payment()
 
-bizum_1 = Bizum("ilos28", "678678678", "0505")
-bizum_2 = Bizum("carcoal", "678945123", "1111")
-paypal = PayPal("ilos28", "xiomara@gmail.com", "holaMundo")
-card = Card("ilos28", "Siomara Alonso", "8124145314781564", "02/26", "333")
+# bizum_1 = Bizum("ilos28", "678678678", "0505")
+# bizum_2 = Bizum("carcoal", "678945123", "1111")
+# paypal = PayPal("ilos28", "xiomara@gmail.com", "holaMundo")
+# card = Card("ilos28", "Siomara Alonso", "8124145314781564", "02/26", "333")
 
 # payment.add_payment_to_file("ilos28", "bizum", bizum_1)
 # payment.add_payment_to_file("carcoal", "bizum", bizum_2)
@@ -157,4 +156,4 @@ card = Card("ilos28", "Siomara Alonso", "8124145314781564", "02/26", "333")
 # payment.add_payment_to_file("ilos28", "card", card)
 # print(payment.get_credentials("ilos28", "paypal"))
 # print(payment.get_credentials("ilos28", "bizum"))
-# print(payment.pay_order("ilos28", "09-05-2022", "bizum", ["678678678", "0505"]))
+print(payment.pay_order("ilos28", "09-05-2022", "bizum", ["678678678", "0505"]))

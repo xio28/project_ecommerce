@@ -1,12 +1,13 @@
 <div align="center">
-    <h1>Kangaroo</h1>
-    <h6>Proyecto E-commerce</h6>
+    <!-- <h1>Kangaroo</h1> -->
+    <h1>Proyecto E-commerce</h1>
+    <h6>Francisco Jerobel Rodriguez Niño <br> Siomara de las Nieves Alonso Hernández</h6>
 </div>
 <hr>
 
 **Kangaroo** es un comercio de distribución de productos para animales basado en el modelo de e-commerce *(comercio online)*. Se dispondrá de una interfaz gráfica hecha con **tkinter** y el lenguaje de programación usado será **python**.
 El funcionamiento del programa consistirá en lo siguiente:
-* Se mostrará una ventana de logeo en la que el usuario podrá introducir sus datos directamente (si ya se encuentra registrado) o, en caso contrario, accederá a un formulario donde podrá registrarse.
+* Se mostrará una ventana de logeo en la que el usuarioFrancisco Jerobel Rodriguez Niño podrá introducir sus datos directamente (si ya se encuentra registrado) o, en caso contrario, accederá a un formulario donde podrá registrarse.
     * Aquellos usuarios que son admin podrán acceder a un panel de administración diferente en donde podrán:
         * Añadir proveedores.
         * Añadir productos.

@@ -1,1 +1,0 @@
-{"id": 1, "username": "ilos28", "order": [["Nature's Variety Original Medium Adult pollo 12kg", 1, 59.95], ["Salvaje Base Esterilizado pienso 12kg", 1, 24.95], ["Alpha Spirit Alb\u00f3ndigas de Ciervo con Romero", 3, 2.99]], "datetime": "09-05-2022", "total": 100.44, "state": "pagado"}
