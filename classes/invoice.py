@@ -31,7 +31,6 @@ class Invoice:
 
 
     def gen_invoice(self, username, datetime):
-
         obj = Invoice(Client.return_client_info(self, username), KangarooPlatform.return_commerce_info(self), Order.get_order_l(self, username, datetime), today)
 
         write_json(obj, INVOICE)
@@ -39,5 +38,4 @@ class Invoice:
 
 
 # inv = Invoice()
-
 # print(inv.gen_invoice("ilos28", "09-05-2022"))
