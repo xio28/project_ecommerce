@@ -1,4 +1,3 @@
-from re import S
 from sys import path
 from os import name
 
@@ -13,11 +12,10 @@ from modules.files import *
 
 class KangarooPlatform:
 
-    def __init__(self, nif = "", ecommerce_name = "", address = "", products = {}):
+    def __init__(self, nif = "", ecommerce_name = "", address = ""):
         self.nif = nif
         self.ecommerce_name = ecommerce_name
         self.address = address
-        self.products = products # Mirar a ver qué hacer con esto
 
 
 
