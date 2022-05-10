@@ -48,8 +48,9 @@ class KangarooPlatform:
             return commerce_info
 
 
-c = KangarooPlatform()
-c1 = KangarooPlatform("G12453786", "Kangaroo", {"street": "C/ Matagalpa, 2", "postal_code": "35010", "city": "Las Palmas de Gran Canaria"})
+
+# c = KangarooPlatform()
+# c1 = KangarooPlatform("G12453786", "Kangaroo", {"street": "C/ Matagalpa, 2", "postal_code": "35010", "city": "Las Palmas de Gran Canaria"})
 
 # c.add_commerce_to_file(c1)
 # print(c.return_commerce_info())

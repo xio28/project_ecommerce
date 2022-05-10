@@ -8,9 +8,8 @@ else:
 
 import json
 from modules.files import *
-from modules.clear import *
 
-clear()
+
 
 def file_as_list(filename):
     with open(filename, "r") as f:
@@ -27,6 +26,7 @@ def auto_key(filename):
 
     else:
         return 1
+
 
 
 def get_file_payment(payment):
